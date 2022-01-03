@@ -1,8 +1,10 @@
 package com.kordyukov.MusicGenerator.Controller
 
 import com.kordyukov.MusicGenerator.Instruments.Bass
+import com.kordyukov.MusicGenerator.Instruments.Hat
 import com.kordyukov.MusicGenerator.Instruments.Kick
 import com.kordyukov.MusicGenerator.Instruments.Piano
+import com.kordyukov.MusicGenerator.Instruments.Snare
 import com.kordyukov.MusicGenerator.Musician
 import lombok.Data
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,6 +25,10 @@ class generatorPage  {
     Kick kick
     @Autowired
     Piano piano
+    @Autowired
+    Snare snare
+    @Autowired
+    Hat hat
 
     @Autowired
     Musician musician
@@ -57,12 +63,32 @@ class generatorPage  {
 
     }
 
+    Thread snareTh = new Thread(){
+        @Override
+        void run() {
+            while (true){
+          snare.playSnare(musician.tempoTrigerSnare(),100)
+            }
+        }
+    }
+
+    Thread hatTh = new Thread(){
+        @Override
+        void run() {
+            while (true){
+                hat.playHat(musician.tempoTrigerHat(),100)
+            }
+        }
+    }
+
     @GetMapping
     public String startPage(){
-        ExecutorService pool = Executors.newFixedThreadPool(3);
-         pool.submit(bassTh)
-        //pool.submit(pianoTh)
+        ExecutorService pool = Executors.newFixedThreadPool(4);
+        pool.submit(bassTh)
+//        //pool.submit(pianoTh)
         pool.submit(kickTh)
+        pool.submit(snareTh)
+        pool.submit(hatTh)
         return "Hello on MusicGenerator page by Kordyukov!"
     }
 

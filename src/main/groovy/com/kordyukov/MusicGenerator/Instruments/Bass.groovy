@@ -23,7 +23,7 @@ class Bass {
             Synthesizer synth = MidiSystem.getSynthesizer();
             synth.open();
             MidiChannel[] channels = synth.getChannels();
-            channels[0].programChange(MusicGeneratorConst.BASS);
+            channels[MusicGeneratorConst.CHANNEL_BASS].programChange(MusicGeneratorConst.BASS);
             channels[MusicGeneratorConst.CHANNEL_BASS].noteOn(note, volume);
             Thread.sleep(temp); // in milliseconds
             channels[MusicGeneratorConst.CHANNEL_BASS].noteOff(note);

@@ -6,4 +6,6 @@ interface Musician {
     int tempoTrigerKick()
     int noteTrigerPiano()
     int tempoTrigerPiano()
+    int tempoTrigerSnare()
+    int tempoTrigerHat()
 }

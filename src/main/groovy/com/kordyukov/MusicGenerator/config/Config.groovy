@@ -2,8 +2,10 @@ package com.kordyukov.MusicGenerator.config
 
 
 import com.kordyukov.MusicGenerator.Instruments.Bass
+import com.kordyukov.MusicGenerator.Instruments.Hat
 import com.kordyukov.MusicGenerator.Instruments.Kick
 import com.kordyukov.MusicGenerator.Instruments.Piano
+import com.kordyukov.MusicGenerator.Instruments.Snare
 import com.kordyukov.MusicGenerator.Instruments.Trigers.Note
 import com.kordyukov.MusicGenerator.Instruments.Trigers.Trigers
 import org.springframework.context.annotation.Bean
@@ -39,5 +41,15 @@ class Config {
     @Bean
     public Piano piano(){
         return new Piano()
+    }
+
+    @Bean
+    public Snare snare(){
+        return new Snare()
+    }
+
+    @Bean
+    public Hat hat(){
+        return new Hat()
     }
 }

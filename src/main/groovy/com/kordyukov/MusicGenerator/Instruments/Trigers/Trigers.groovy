@@ -11,16 +11,22 @@ class Trigers implements Musician {
     @Autowired
     Note note
 
-    int [] tempBass = IntStream.of(100, 200, 400, 800).toArray()
-    int [] tempKick = IntStream.of(400, 800).toArray()
-    int [] tempPiano = IntStream.of(50, 100,200,400,800).toArray()
+    int [] tempBass = IntStream.of(200, 400, 800).toArray()
+    int [] tempKick = IntStream.of(200,400, 800).toArray()
+    int [] tempPiano = IntStream.of(100, 200,400,800,1600).toArray()
+    int [] tempSnare = IntStream.of( 400,800).toArray()
+    int [] tempHat = IntStream.of( 100,200,400).toArray()
+
     int tempo,tempo1;
     int tempoKick;
+    int tempoSnare;
+    int tempoHat;
+    int tonicNoteCount;
 
 
     int tempoTrigerBass(){
-        tempo = tempBass[(0 + (int) (Math.random() * 3))];
-        tempo1 = tempBass[(0 + (int) (Math.random() * 3))];
+        tempo = tempBass[(0 + (int) (Math.random() * 2))];
+        tempo1 = tempBass[(0 + (int) (Math.random() * 2))];
         if(tempo == tempo1) {
             printf "\ntemp bass " + tempo
             return tempo
@@ -37,9 +43,21 @@ class Trigers implements Musician {
     }
 
     int tempoTrigerKick(){
-        tempoKick = tempKick[(0 + (int) (Math.random() * 1))];
+        tempoKick = tempKick[(0 + (int) (Math.random() * 2))];
         printf "\ntemp kick " + tempoKick
             return tempoKick
+    }
+
+    int tempoTrigerSnare(){
+        tempoSnare = tempSnare[(0 + (int) (Math.random() * 1))];
+        printf "\ntemp snare " + tempoSnare
+        return tempoSnare
+    }
+
+    int tempoTrigerHat(){
+        tempoHat = tempHat[(0 + (int) (Math.random() * 2))];
+        printf "\ntemp Hat " + tempoHat
+        return tempoHat
     }
 
     int noteTrigerBass(){
@@ -52,8 +70,9 @@ class Trigers implements Musician {
             note += 12
         } else if (note > 48)
            {
-            note -= 36
+            note -= 24
            }
+
         return note
     }
 

@@ -8,27 +8,23 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Synthesizer;
 
 @Data
-public class Kick {
-
-    private int note = 36;
+public class Snare {
+    private int note = 38;
     private int temp;
     private int volume;
 
-    public void playKick(int temp, int volume) {
+    public void playSnare(int temp, int volume) {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
             synth.open();
             MidiChannel[] channels = synth.getChannels();
-            channels[MusicGeneratorConst.CHANNEL_KICK].programChange(MusicGeneratorConst.KICK);
-            channels[MusicGeneratorConst.CHANNEL_KICK].noteOn(note, volume);
+            channels[MusicGeneratorConst.CHANNEL_SNARE].programChange(MusicGeneratorConst.SNARE);
+            channels[MusicGeneratorConst.CHANNEL_SNARE].noteOn(note, volume);
             Thread.sleep(temp); // in milliseconds
-            channels[MusicGeneratorConst.CHANNEL_KICK].noteOff(note);
+            channels[MusicGeneratorConst.CHANNEL_SNARE].noteOff(note);
             synth.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
-
-
