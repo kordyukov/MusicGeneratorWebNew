@@ -13,6 +13,7 @@ import javax.sound.midi.Synthesizer
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
+import javax.sound.sampled.FloatControl
 import javax.sound.sampled.LineUnavailableException
 import javax.sound.sampled.UnsupportedAudioFileException
 
@@ -30,13 +31,18 @@ class Bass {
 
         //Получаем реализацию интерфейса Clip
         //Может выкинуть LineUnavailableException
-        Clip clip = AudioSystem.getClip();
+        Clip clip = AudioSystem.getClip()
+
 
         //Загружаем наш звуковой поток в Clip
         //Может выкинуть IOException и LineUnavailableException
         clip.open(ais);
 
-        clip.setFramePosition(0); //устанавливаем указатель на старт
+        clip.setFramePosition(0); //устанавливаем указатель на стар
+            FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN)
+            double gain = .5D; // number between 0 and 1 (loudest)
+            float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+            gainControl.setValue(dB)
         clip.start(); //Поехали!!!
         //Если не запущено других потоков, то стоит подождать, пока клип не закончится
         //В GUI-приложениях следующие 3 строчки не понадобятся
