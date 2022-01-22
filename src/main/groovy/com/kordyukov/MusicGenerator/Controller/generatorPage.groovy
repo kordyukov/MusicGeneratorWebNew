@@ -33,12 +33,16 @@ class generatorPage  {
     @Autowired
     Musician musician
 
+
+
     Thread bassTh = new Thread(){
+        private int tempBass;
         @Override
         void run() {
-            while (true) {
-                bass.playBass(musician.noteTrigerBass(),musician.tempoTrigerBass(),100)
-            }
+           while (true){
+               bass.playBass(musician.tempoTrigerBass())
+               Thread.sleep(musician.tempoTrigerBass())
+           }
         }
 
     }

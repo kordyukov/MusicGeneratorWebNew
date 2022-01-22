@@ -11,7 +11,7 @@ class Trigers implements Musician {
     @Autowired
     Note note
 
-    int [] tempBass = IntStream.of(200, 400, 800).toArray()
+    int [] tempBass = IntStream.of(100, 200, 400).toArray()
     int [] tempKick = IntStream.of(200,400, 800).toArray()
     int [] tempPiano = IntStream.of(100, 200,400,800,1600).toArray()
     int [] tempSnare = IntStream.of( 400,800).toArray()
