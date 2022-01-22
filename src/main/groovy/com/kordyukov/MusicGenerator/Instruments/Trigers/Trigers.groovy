@@ -1,5 +1,6 @@
 package com.kordyukov.MusicGenerator.Instruments.Trigers
 
+import com.kordyukov.MusicGenerator.MusicGeneratorConst
 import com.kordyukov.MusicGenerator.Musician
 import lombok.Data
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,9 +12,9 @@ class Trigers implements Musician {
     @Autowired
     Note note
 
-    int [] tempBass = IntStream.of(200, 400, 800).toArray()
+    int [] tempBass = IntStream.of(50, 100, 200, 400, 800).toArray()
     int [] tempKick = IntStream.of(200,400, 800).toArray()
-    int [] tempPiano = IntStream.of(100, 200,400,800,1600).toArray()
+    int [] tempPiano = IntStream.of(50, 100, 200, 400, 800).toArray()
     int [] tempSnare = IntStream.of( 400,800).toArray()
     int [] tempHat = IntStream.of( 100,200,400).toArray()
 
@@ -25,8 +26,8 @@ class Trigers implements Musician {
 
 
     int tempoTrigerBass(){
-        tempo = tempBass[(0 + (int) (Math.random() * 2))];
-        tempo1 = tempBass[(0 + (int) (Math.random() * 2))];
+        tempo = tempBass[(0 + (int) (Math.random() * 4))];
+        tempo1 = tempBass[(0 + (int) (Math.random() * 4))];
         if(tempo == tempo1) {
             printf "\ntemp bass " + tempo
             return tempo
@@ -64,7 +65,12 @@ class Trigers implements Musician {
 
         int a = 0 + (int) (Math.random() * 6);
         int b = 0 + (int) (Math.random() * 8);
+        int ran = 0 + (int) (Math.random() * 2);
+        int ran1 = 0 + (int) (Math.random() * 2);
+
         int note = note.notes[a][b]
+
+        boolean ton = ran == ran1 ? true : false
 
         if(note < 12){
             note += 12
@@ -72,15 +78,34 @@ class Trigers implements Musician {
            {
             note -= 24
            }
+        if (ton){
+          return MusicGeneratorConst.BASS_NOTE_TONIC
+        } else {
+            return note
+        }
 
-        return note
     }
 
     int noteTrigerPiano(){
 
         int a = 0 + (int) (Math.random() * 6);
         int b = 0 + (int) (Math.random() * 8);
+        int ran = 0 + (int) (Math.random() * 1);
+        int ran1 = 0 + (int) (Math.random() * 1);
+
         int note = note.notes[a][b]
-        return note
+
+        boolean ton = ran == ran1 ? true : false
+
+        if(note < 12){
+            note += 12
+        }
+
+        if (!ton){
+            return MusicGeneratorConst.PIANO_NOTE_TONIC
+        } else {
+            return note
+        }
+
     }
 }

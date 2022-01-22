@@ -33,6 +33,9 @@ class generatorPage  {
     @Autowired
     Musician musician
 
+    private int ran
+    private int ran1
+
     Thread bassTh = new Thread(){
         @Override
         void run() {
@@ -85,7 +88,7 @@ class generatorPage  {
     public String startPage(){
         ExecutorService pool = Executors.newFixedThreadPool(4);
         pool.submit(bassTh)
-//        //pool.submit(pianoTh)
+       // pool.submit(pianoTh)
         pool.submit(kickTh)
         pool.submit(snareTh)
         pool.submit(hatTh)
