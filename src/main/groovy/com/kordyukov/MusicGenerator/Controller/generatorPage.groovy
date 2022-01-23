@@ -39,8 +39,9 @@ class generatorPage  {
         private int tempBass;
         @Override
         void run() {
+            File file = new File("Bass.wav")
            while (true){
-               bass.playBass(musician.tempoTrigerBass())
+               bass.play(file,musician.tempoTrigerBass(),musician.noteTrigerBass())
                Thread.sleep(musician.tempoTrigerBass())
            }
         }
