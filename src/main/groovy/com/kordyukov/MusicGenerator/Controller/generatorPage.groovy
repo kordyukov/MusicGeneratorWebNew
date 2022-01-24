@@ -41,7 +41,7 @@ class generatorPage  {
         void run() {
             File file = new File("Bass.wav")
            while (true){
-               bass.play(file,musician.tempoTrigerBass(),musician.noteTrigerBass())
+               bass.play(file,musician.tempoTrigerBass(),musician.noteTrigerSpeedBass())
                Thread.sleep(musician.tempoTrigerBass())
            }
         }
@@ -61,8 +61,10 @@ class generatorPage  {
     Thread kickTh = new Thread(){
         @Override
         void run() {
+            File file = new File("Kick.wav")
             while (true) {
-                kick.playKick(musician.tempoTrigerKick(),100)
+                kick.play(file,musician.tempoTrigerKick())
+                Thread.sleep(musician.tempoTrigerKick())
             }
         }
 

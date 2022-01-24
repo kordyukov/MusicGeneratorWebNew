@@ -61,13 +61,14 @@ class Bass {
     } catch (InterruptedException exc) {}
     }
 
-     void play(File file, int tempo, int note) {
+     void play(File file, int tempo, float note) {
 
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             AudioFormat formatIn = audioInputStream.getFormat();
-            AudioFormat format = new AudioFormat(formatIn.getSampleRate()*a as float, formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
-            a = a - 0.09;
+            AudioFormat format = new AudioFormat(formatIn.getSampleRate()*note as float, formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
+            //a = a + 0.01;
+
             System.out.println(formatIn.toString());
             System.out.println(format.toString());
             byte[] data = new byte[1024];
