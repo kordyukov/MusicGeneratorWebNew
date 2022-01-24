@@ -73,8 +73,10 @@ class generatorPage  {
     Thread snareTh = new Thread(){
         @Override
         void run() {
+            File file = new File("Snare.wav")
             while (true){
-          snare.playSnare(musician.tempoTrigerSnare(),100)
+            snare.play(file,musician.tempoTrigerSnare())
+                Thread.sleep(musician.tempoTrigerSnare())
             }
         }
     }
@@ -82,8 +84,11 @@ class generatorPage  {
     Thread hatTh = new Thread(){
         @Override
         void run() {
+            File file = new File("Hat.wav")
             while (true){
-                hat.playHat(musician.tempoTrigerHat(),100)
+                hat.play(file,musician.tempoTrigerHat())
+                Thread.sleep(musician.tempoTrigerHat())
+
             }
         }
     }
