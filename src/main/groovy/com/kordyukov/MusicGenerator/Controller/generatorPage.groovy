@@ -55,8 +55,11 @@ class generatorPage  {
     Thread pianoTh = new Thread(){
         @Override
         void run() {
+            File file = new File("pad.wav")
             while (true) {
-                piano.playPiano(musician.noteTrigerPiano(),musician.tempoTrigerPiano(),100)
+                temp = musician.tempoTrigerBass()
+                piano.play(file,temp,musician.noteTrigerSpeedBass())
+                Thread.sleep(temp)
             }
 
         }
@@ -101,7 +104,7 @@ class generatorPage  {
     public String startPage(){
         ExecutorService pool = Executors.newFixedThreadPool(4);
         pool.submit(bassTh)
-//        //pool.submit(pianoTh)
+        pool.submit(pianoTh)
         pool.submit(kickTh)
  //       pool.submit(snareTh)
         pool.submit(hatTh)

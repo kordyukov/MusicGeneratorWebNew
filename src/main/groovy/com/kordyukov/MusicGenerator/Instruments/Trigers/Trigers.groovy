@@ -90,7 +90,7 @@ class Trigers implements Musician {
         } else {
             return note
         }
-        return note
+        return noteSpeed[0]
 
     }
 
