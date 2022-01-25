@@ -16,7 +16,7 @@ class Trigers implements Musician {
     int [] tempKick = IntStream.of(325, 650).toArray()
     int [] tempPiano = IntStream.of(100, 200,400,800,1600).toArray()
     int [] tempSnare = IntStream.of( 325, 650).toArray()
-    int [] tempHat = IntStream.of( 325, 650).toArray()
+    int [] tempHat = IntStream.of( 162, 325, 650).toArray()
     float [] noteSpeed = new float[] {0.50, 0.56, 0.63, 0.66, 0.75, 0.84, 0.94, 1.0 ,1.12, 1.27, 1.34, 1.50, 1.66, 1.86, 1.98}
 
     int tempo,tempo1;
@@ -53,7 +53,7 @@ class Trigers implements Musician {
     }
 
     int tempoTrigerHat(){
-        tempoHat = tempHat[(0 + (int) (Math.random() * 1))];
+        tempoHat = tempHat[(0 + (int) (Math.random() * 2))];
         printf "\ntemp Hat " + tempoHat
         return tempoHat
     }
