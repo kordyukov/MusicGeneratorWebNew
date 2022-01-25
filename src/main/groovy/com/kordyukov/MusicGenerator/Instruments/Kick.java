@@ -39,8 +39,8 @@ public class Kick {
             AudioFormat format = new AudioFormat((float) (formatIn.getSampleRate()*1.0), formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
             //a = a + 0.01;
 
-            System.out.println(formatIn.toString());
-            System.out.println(format.toString());
+//            System.out.println(formatIn.toString());
+//            System.out.println(format.toString());
             byte[] data = new byte[1024];
             DataLine.Info dinfo = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine line = (SourceDataLine)AudioSystem.getLine(dinfo);

@@ -33,16 +33,20 @@ class generatorPage  {
     @Autowired
     Musician musician
 
+    int temp = 0
 
 
     Thread bassTh = new Thread(){
         private int tempBass;
         @Override
         void run() {
+
             File file = new File("Bass.wav")
+            int temp = 0
            while (true){
-               bass.play(file,musician.tempoTrigerBass(),musician.noteTrigerSpeedBass())
-               Thread.sleep(musician.tempoTrigerBass())
+               temp = musician.tempoTrigerBass()
+               bass.play(file,temp,musician.noteTrigerSpeedBass())
+               Thread.sleep(temp)
            }
         }
 
@@ -99,7 +103,7 @@ class generatorPage  {
         pool.submit(bassTh)
 //        //pool.submit(pianoTh)
         pool.submit(kickTh)
-        pool.submit(snareTh)
+ //       pool.submit(snareTh)
         pool.submit(hatTh)
         return "Hello on MusicGenerator page by Kordyukov!"
     }
