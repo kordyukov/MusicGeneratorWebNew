@@ -8,6 +8,7 @@ import com.kordyukov.MusicGenerator.Instruments.Snare
 import com.kordyukov.MusicGenerator.Musician
 import lombok.Data
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -16,8 +17,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @Data
-@RequestMapping("MusicGenerator")
-@RestController
+@Controller
 class generatorPage  {
     @Autowired
     Bass bass
@@ -101,14 +101,14 @@ class generatorPage  {
     }
 
     @GetMapping
-    public String startPage(){
+     String startPage(){
         ExecutorService pool = Executors.newFixedThreadPool(4);
         pool.submit(bassTh)
         pool.submit(pianoTh)
         pool.submit(kickTh)
  //       pool.submit(snareTh)
         pool.submit(hatTh)
-        return "Hello on MusicGenerator page by Kordyukov!"
+        return "Index"
     }
 
 
