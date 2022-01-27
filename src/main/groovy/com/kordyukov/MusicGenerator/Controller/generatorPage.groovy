@@ -36,7 +36,6 @@ class generatorPage  {
 
     int temp = 0
 
-
     Thread bassTh = new Thread(){
         private int tempBass;
         @Override
@@ -103,14 +102,16 @@ class generatorPage  {
 
     @GetMapping
      String startPage(){
-        ExecutorService pool = Executors.newFixedThreadPool(4);
-//        pool.submit(bassTh)
-//        pool.submit(pianoTh)
-//        pool.submit(kickTh)
-// //       pool.submit(snareTh)
-//        pool.submit(hatTh)
-        return "Index"
-    }
+        ExecutorService pool;
+       pool = Executors.newFixedThreadPool(4);
+//            pool.submit(bassTh)
+//            pool.submit(pianoTh)
+//            pool.submit(kickTh)
+//// //       pool.submit(snareTh)
+//            pool.submit(hatTh)
 
+            return "index"
+
+    }
 
 }
