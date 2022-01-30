@@ -6,7 +6,21 @@
         body {background: aqua}
         p {font-size: 50px;font-family: Impact;flood-opacity: initial;}
     </style>
+<script>
+    function ready() {
+        alert('DOM готов');
 
+        navigator.mediaDevices.getUserMedia({ audio: true})
+            .then(stream => {
+                const mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start(); });
+
+
+    }
+
+    document.addEventListener("DOMContentLoaded", ready);
+
+</script>
 
 </head>
 <body>

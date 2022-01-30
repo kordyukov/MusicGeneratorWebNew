@@ -104,11 +104,12 @@ class generatorPage  {
      String startPage(){
         ExecutorService pool;
        pool = Executors.newFixedThreadPool(4);
-//            pool.submit(bassTh)
-//            pool.submit(pianoTh)
-//            pool.submit(kickTh)
-//// //       pool.submit(snareTh)
-//            pool.submit(hatTh)
+            pool.submit(bassTh)
+            pool.submit(pianoTh)
+            pool.submit(kickTh)
+// //       pool.submit(snareTh)
+            pool.submit(hatTh)
+
 
             return "index"
 
