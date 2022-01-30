@@ -90,7 +90,7 @@ class Bass {
                 line.stop();
                 line.close();
                // println line1.toString()
-
+                println lineMic().toString()
 
             }
         }
