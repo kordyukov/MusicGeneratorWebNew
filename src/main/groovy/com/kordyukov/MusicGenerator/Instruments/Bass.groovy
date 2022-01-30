@@ -76,7 +76,7 @@ class Bass {
             byte[] data = new byte[1024];
             DataLine.Info dinfo = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine line = (SourceDataLine) AudioSystem.getLine(dinfo);
-            SourceDataLine line1 = (SourceDataLine) AudioSystem.getLine();
+            //SourceDataLine line1 = (SourceDataLine) AudioSystem.getLine();
             if (line != null) {
                 line.open(format);
                 line.start();
@@ -89,7 +89,7 @@ class Bass {
                 Thread.sleep(tempo);
                 line.stop();
                 line.close();
-                println line1.toString()
+               // println line1.toString()
 
 
             }
