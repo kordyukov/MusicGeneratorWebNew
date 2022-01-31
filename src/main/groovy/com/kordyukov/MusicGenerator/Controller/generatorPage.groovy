@@ -1,6 +1,7 @@
 package com.kordyukov.MusicGenerator.Controller
 
 import com.kordyukov.MusicGenerator.Instruments.Bass
+import com.kordyukov.MusicGenerator.Instruments.Forte
 import com.kordyukov.MusicGenerator.Instruments.Hat
 import com.kordyukov.MusicGenerator.Instruments.Kick
 import com.kordyukov.MusicGenerator.Instruments.Piano
@@ -10,9 +11,6 @@ import lombok.Data
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -30,6 +28,8 @@ class generatorPage  {
     Snare snare
     @Autowired
     Hat hat
+    @Autowired
+    Forte forte
 
     @Autowired
     Musician musician
@@ -37,7 +37,6 @@ class generatorPage  {
     int temp = 0
 
     Thread bassTh = new Thread(){
-        private int tempBass;
         @Override
         void run() {
 
@@ -48,6 +47,21 @@ class generatorPage  {
                bass.play(file,temp,musician.noteTrigerSpeedBass())
                Thread.sleep(temp)
            }
+        }
+
+    }
+
+    Thread forteTh= new Thread(){
+        @Override
+        void run() {
+
+            File file = new File("forte.wav")
+            int temp = 0
+            while (true){
+                temp = musician.tempoTrigerForte()
+                forte.play(file,temp,musician.noteTrigerSpeedForte())
+                Thread.sleep(temp)
+            }
         }
 
     }
@@ -103,13 +117,13 @@ class generatorPage  {
     @GetMapping
      String startPage(){
         ExecutorService pool;
-       pool = Executors.newFixedThreadPool(4);
+       pool = Executors.newFixedThreadPool(10);
             pool.submit(bassTh)
             pool.submit(pianoTh)
             pool.submit(kickTh)
 // //       pool.submit(snareTh)
             pool.submit(hatTh)
-
+            //pool.submit(forteTh)
 
             return "index"
 

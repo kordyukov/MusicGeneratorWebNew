@@ -2,6 +2,7 @@ package com.kordyukov.MusicGenerator.config
 
 
 import com.kordyukov.MusicGenerator.Instruments.Bass
+import com.kordyukov.MusicGenerator.Instruments.Forte
 import com.kordyukov.MusicGenerator.Instruments.Hat
 import com.kordyukov.MusicGenerator.Instruments.Kick
 import com.kordyukov.MusicGenerator.Instruments.Piano
@@ -51,5 +52,9 @@ class Config {
     @Bean
     public Hat hat(){
         return new Hat()
+    }
+    @Bean
+    public Forte forte(){
+        return new Forte()
     }
 }

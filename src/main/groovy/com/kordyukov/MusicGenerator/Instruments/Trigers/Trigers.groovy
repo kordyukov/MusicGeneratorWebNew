@@ -13,6 +13,7 @@ class Trigers implements Musician {
     Note note
 
     int [] tempBass = IntStream.of(50,200,400).toArray()
+    int [] tempForte = IntStream.of(50,200,400).toArray()
     int [] tempKick = IntStream.of(325, 650).toArray()
     int [] tempPiano = IntStream.of(100, 200,400,800,1600).toArray()
     int [] tempSnare = IntStream.of( 325, 650).toArray()
@@ -31,6 +32,12 @@ class Trigers implements Musician {
         tempo = tempBass[(0 + (int) (Math.random() * 0))];
         println "temb bass " + tempo
             return tempo * 4
+
+    }
+    int tempoTrigerForte(){
+        tempo = tempForte[(0 + (int) (Math.random() * 0))];
+        println "temb forte " + tempo
+        return tempo * 4
 
     }
 
@@ -93,6 +100,28 @@ class Trigers implements Musician {
         return noteSpeed[0]
 
     }
+
+    float noteTrigerSpeedForte(){
+
+        float note = noteSpeed[0 + (int) (Math.random() * 14)]
+        int shans = 0 + (int) (Math.random() * 2)
+        int shans1 = 0 + (int) (Math.random() * 2)
+
+        boolean fort = shans1 == shans
+        println fort
+
+        if (!fort) {
+            println "do return " + noteRand
+            noteRand = noteRand
+            return noteRand
+        } else {
+            return note
+        }
+        return noteSpeed[0]
+
+    }
+
+
 
     int noteTrigerPiano(){
 
