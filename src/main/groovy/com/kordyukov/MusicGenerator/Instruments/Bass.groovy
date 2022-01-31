@@ -20,7 +20,9 @@ import javax.sound.sampled.Line
 import javax.sound.sampled.LineUnavailableException
 import javax.sound.sampled.Mixer
 import javax.sound.sampled.SourceDataLine
+import javax.sound.sampled.TargetDataLine
 import javax.sound.sampled.UnsupportedAudioFileException
+import javax.swing.JOptionPane
 
 @Data
 class Bass {
@@ -69,28 +71,25 @@ class Bass {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             AudioFormat formatIn = audioInputStream.getFormat();
             AudioFormat format = new AudioFormat(formatIn.getSampleRate() * note as float, formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
-            //a = a + 0.01;
-
-//            System.out.println(formatIn.toString());
-//            System.out.println(format.toString());
             byte[] data = new byte[1024];
             DataLine.Info dinfo = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine line = (SourceDataLine) AudioSystem.getLine(dinfo);
-            //SourceDataLine line1 = (SourceDataLine) AudioSystem.getLine();
+
             if (line != null) {
                 line.open(format);
                 line.start();
+
 
                 while (true) {
                     int k = audioInputStream.read(data, 0, data.length);
                     if (k < 0) break;
                     line.write(data, 0, k);
+
                 }
                 Thread.sleep(tempo);
                 line.stop();
                 line.close();
-               // println line1.toString()
-                println lineMic().toString()
+
 
             }
         }
@@ -99,33 +98,30 @@ class Bass {
         }
     }
 
-    Line lineMic() {
-        Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
-        String mic = null;
-        Line line = null;
-        Mixer m = null;
-        Line.Info[] lineInfos;
-        for (int i = 0; i < mixerInfos.length; i++) {
-            if (mixerInfos[i].toString().toUpperCase().contains("MIC")) {
-                mic = mixerInfos[i].toString()
-                println " Search ok!!! " + mic
-                println mixerInfos[i].getClass().toString()
-                m = AudioSystem.getMixer(mixerInfos[i])
-                println " m " + m
-                lineInfos = m.getSourceLineInfo();
-
-                for (int b = 0; b < lineInfos.length; b++) {
-                    println " lineInfos[b] " + lineInfos[b].toString()
-                    line = m.getLine(lineInfos[b])
-                    System.out.println("line.toString()" + line.toString());
-                    //break
-                }
-            }
-            println line.toString() + "ewrewr"
-
+    void lineMic(AudioFormat format, byte[] data, int k) {
+        TargetDataLine mike;
+        // линию соединения
+        DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+        // проверить, поддерживается ли линия
+        if (!AudioSystem.isLineSupported(info)) {
+            JOptionPane.showMessageDialog(null, "Line not supported" +
+                    info, "Line not supported",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        println line.toString() + "end"
-        return line
+        try {
+            // получить подходящую линию
+            mike = (TargetDataLine) AudioSystem.getLine(info);
+            // открываем линию соединения с указанным
+            // форматом и размером буфера
+            println " mike.toString() " + mike.toString()
+            mike.open(mike.format, mike.getBufferSize());
+            println "mike.format.toString()" + mike.format.toString()
+            mike.addLineListener()
+            mike.stop();
+            mike.close()
+            //mike.close();
+            println "ok!!!"
+        }catch(Exception e){print(e)}
 
     }
 }
