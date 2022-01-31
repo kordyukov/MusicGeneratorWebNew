@@ -35,6 +35,8 @@ class generatorPage  {
     Musician musician
 
     int temp = 0
+    int attemptUser = 0;
+
 
     Thread bassTh = new Thread(){
         @Override
@@ -117,14 +119,22 @@ class generatorPage  {
     @GetMapping
      String startPage(){
         ExecutorService pool;
-       pool = Executors.newFixedThreadPool(10);
-            pool.submit(bassTh)
-            pool.submit(pianoTh)
-            pool.submit(kickTh)
-// //       pool.submit(snareTh)
-            pool.submit(hatTh)
-            //pool.submit(forteTh)
+        pool = Executors.newFixedThreadPool(4);
 
+            if (attemptUser == 0) {
+                pool.submit(bassTh)
+                pool.submit(pianoTh)
+                pool.submit(kickTh)
+// //       pool.submit(snareTh)
+                pool.submit(hatTh)
+                //pool.submit(forteTh)
+            }else {
+                pool.shutdown()
+                println "pool potoc " + pool.properties.toString()
+                attemptUser = 0
+            }
+            attemptUser++
+        println "attemptUser" + attemptUser
             return "index"
 
     }
