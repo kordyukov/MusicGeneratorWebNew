@@ -7,6 +7,7 @@ import com.kordyukov.MusicGenerator.Instruments.Kick
 import com.kordyukov.MusicGenerator.Instruments.Piano
 import com.kordyukov.MusicGenerator.Instruments.Snare
 import com.kordyukov.MusicGenerator.Musician
+import com.kordyukov.MusicGenerator.SimpleHttpServer.SimpleHttpServer
 import lombok.Data
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -181,11 +182,18 @@ class generatorPage {
         }
     }
 
+        Thread serverStart = new Thread(){
+            @Override
+            void run() {
+                SimpleHttpServer server = new SimpleHttpServer();
+                server.start();
+            }
+        }
 
         @GetMapping
         String startPage() {
             ExecutorService pool;
-            pool = Executors.newFixedThreadPool(5);
+            pool = Executors.newFixedThreadPool(6);
 
             if (attemptUser == 0) {
                 pool.submit(bassTh)
@@ -195,6 +203,7 @@ class generatorPage {
                 pool.submit(hatTh)
                 //pool.submit(forteTh)
                 pool.submit(socketRec)
+                pool.submit(serverStart)
             } else {
                 pool.shutdown()
                 println "pool potoc " + pool.properties.toString()
