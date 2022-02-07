@@ -30,7 +30,7 @@ public class StaticFileHandler implements HttpHandler {
 
             Headers h = ex.getResponseHeaders();
             // Could be more clever about the content type based on the filename here.
-            h.add("Content-Type", "text/html");
+            h.add("Content-Type", "audio/wav");
 
             OutputStream out = ex.getResponseBody();
 

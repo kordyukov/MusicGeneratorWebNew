@@ -193,7 +193,7 @@ class generatorPage {
         @GetMapping
         String startPage() {
             ExecutorService pool;
-            pool = Executors.newFixedThreadPool(6);
+            pool = Executors.newFixedThreadPool(10);
 
             if (attemptUser == 0) {
                 pool.submit(bassTh)
