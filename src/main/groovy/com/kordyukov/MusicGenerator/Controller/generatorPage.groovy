@@ -146,6 +146,12 @@ class generatorPage {
             TargetDataLine mike;
             file = new File("music.wav")
 
+            if(!file.exists()){
+                file.createNewFile();
+            }else{
+                System.out.println("File already exists");
+            }
+
             // линию соединения
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
             // проверить, поддерживается ли линия
@@ -157,6 +163,7 @@ class generatorPage {
             try {
                 // получить подходящую линию
                 mike = (TargetDataLine) AudioSystem.getLine(info);
+                println "info.toString()" + info.toString()
                 // открываем линию соединения с указанным
                 // форматом и размером буфера
                 mike.open(format, mike.getBufferSize());
