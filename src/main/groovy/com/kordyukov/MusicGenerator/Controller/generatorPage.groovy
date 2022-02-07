@@ -12,12 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 
+import javax.sound.sampled.AudioFileFormat
+import javax.sound.sampled.AudioFormat
+import javax.sound.sampled.AudioInputStream
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.DataLine
+import javax.sound.sampled.LineUnavailableException
+import javax.sound.sampled.TargetDataLine
+import javax.swing.JOptionPane
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @Data
 @Controller
-class generatorPage  {
+class generatorPage {
     @Autowired
     Bass bass
     @Autowired
@@ -38,88 +46,142 @@ class generatorPage  {
     int attemptUser = 0;
 
 
-    Thread bassTh = new Thread(){
+    Thread bassTh = new Thread() {
         @Override
         void run() {
 
             File file = new File("Bass.wav")
             int temp = 0
-           while (true){
-               temp = musician.tempoTrigerBass()
-               bass.play(file,temp,musician.noteTrigerSpeedBass())
-               Thread.sleep(temp)
-           }
+            while (true) {
+                temp = musician.tempoTrigerBass()
+                bass.play(file, temp, musician.noteTrigerSpeedBass())
+                Thread.sleep(temp)
+            }
         }
 
     }
 
-    Thread forteTh= new Thread(){
+    Thread forteTh = new Thread() {
         @Override
         void run() {
 
             File file = new File("forte.wav")
             int temp = 0
-            while (true){
+            while (true) {
                 temp = musician.tempoTrigerForte()
-                forte.play(file,temp,musician.noteTrigerSpeedForte())
+                forte.play(file, temp, musician.noteTrigerSpeedForte())
                 Thread.sleep(temp)
             }
         }
 
     }
 
-    Thread pianoTh = new Thread(){
+    Thread pianoTh = new Thread() {
         @Override
         void run() {
             File file = new File("pad.wav")
             while (true) {
                 temp = musician.tempoTrigerBass()
-                piano.play(file,temp,musician.noteTrigerSpeedBass())
+                piano.play(file, temp, musician.noteTrigerSpeedBass())
                 Thread.sleep(temp)
             }
 
         }
     }
 
-    Thread kickTh = new Thread(){
+    Thread kickTh = new Thread() {
         @Override
         void run() {
             File file = new File("Kick.wav")
             while (true) {
-                kick.play(file,musician.tempoTrigerKick())
+                kick.play(file, musician.tempoTrigerKick())
                 Thread.sleep(musician.tempoTrigerKick())
             }
         }
 
     }
 
-    Thread snareTh = new Thread(){
+    Thread snareTh = new Thread() {
         @Override
         void run() {
             File file = new File("Snare.wav")
-            while (true){
-            snare.play(file,musician.tempoTrigerSnare())
+            while (true) {
+                snare.play(file, musician.tempoTrigerSnare())
                 Thread.sleep(musician.tempoTrigerSnare())
             }
         }
     }
 
-    Thread hatTh = new Thread(){
+    Thread hatTh = new Thread() {
         @Override
         void run() {
             File file = new File("Hat.wav")
-            while (true){
-                hat.play(file,musician.tempoTrigerHat())
+            while (true) {
+                hat.play(file, musician.tempoTrigerHat())
                 Thread.sleep(musician.tempoTrigerHat())
 
             }
         }
     }
 
-    @GetMapping
-     String startPage(){
-        ExecutorService pool;
-        pool = Executors.newFixedThreadPool(4);
+    Thread socketRec = new Thread() {
+
+        @Override
+        void run() {
+            // текущий звуковой файл
+            File file;
+            // полное имя файла
+            String soundFileName;
+            // основное имя файла
+            String filename = "samples_";
+            // номер файла
+            int suffix = 0;
+            // аудио формат
+            AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
+            int MONO = 1;
+            // определение формата аудио данных
+            AudioFormat format = new AudioFormat(
+                    AudioFormat.Encoding.PCM_SIGNED, 44100, 16, MONO, 2, 44100, true);
+            // микрофонный вход
+            TargetDataLine mike;
+            file = new File("music.wav")
+
+            // линию соединения
+            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+            // проверить, поддерживается ли линия
+            if (!AudioSystem.isLineSupported(info)) {
+                JOptionPane.showMessageDialog(null, "Line not supported" +
+                        info, "Line not supported",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            try {
+                // получить подходящую линию
+                mike = (TargetDataLine) AudioSystem.getLine(info);
+                // открываем линию соединения с указанным
+                // форматом и размером буфера
+                mike.open(format, mike.getBufferSize());
+                // поток микрофона
+                AudioInputStream sound = new AudioInputStream(mike);
+                // запустить линию соединения
+                mike.start();
+                // записать содержимое потока в файл
+                AudioSystem.write(sound, fileType, file);
+            } catch (LineUnavailableException ex) {
+                JOptionPane.showMessageDialog(null, "Line not available" +
+                        ex, "Line not available",
+                        JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "I/O Error " + ex,
+                        "I/O Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+
+        @GetMapping
+        String startPage() {
+            ExecutorService pool;
+            pool = Executors.newFixedThreadPool(5);
 
             if (attemptUser == 0) {
                 pool.submit(bassTh)
@@ -128,15 +190,16 @@ class generatorPage  {
 // //       pool.submit(snareTh)
                 pool.submit(hatTh)
                 //pool.submit(forteTh)
-            }else {
+                pool.submit(socketRec)
+            } else {
                 pool.shutdown()
                 println "pool potoc " + pool.properties.toString()
                 attemptUser = 0
             }
             attemptUser++
-        println "attemptUser" + attemptUser
+            println "attemptUser" + attemptUser
             return "index"
 
-    }
+        }
 
 }

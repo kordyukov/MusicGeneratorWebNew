@@ -8,20 +8,8 @@
     </style>
 <script>
     function ready() {
-        alert('DOM готов');
-        navigator.mediaDevices.getUserMedia({ audio: true})
-            .then(stream => {
-                const mediaRecorder = new MediaRecorder(stream);
-                let voice = [];
 
-                    mediaRecorder.start();
-            });
-
-
-
-
-
-    }
+            }
 
     document.addEventListener("DOMContentLoaded", ready);
 
