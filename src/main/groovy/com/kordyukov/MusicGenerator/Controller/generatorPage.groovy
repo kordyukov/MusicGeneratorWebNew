@@ -130,12 +130,6 @@ class generatorPage {
         void run() {
             // текущий звуковой файл
             File file;
-            // полное имя файла
-            String soundFileName;
-            // основное имя файла
-            String filename = "samples_";
-            // номер файла
-            int suffix = 0;
             // аудио формат
             AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
             int MONO = 1;
@@ -144,7 +138,7 @@ class generatorPage {
                     AudioFormat.Encoding.PCM_SIGNED, 44100, 16, MONO, 2, 44100, true);
             // микрофонный вход
             TargetDataLine mike;
-            file = new File("music.wav")
+            file = new File("src/main/resources/music.wav")
 
             if(!file.exists()){
                 file.createNewFile();
