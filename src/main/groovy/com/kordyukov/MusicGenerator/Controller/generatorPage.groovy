@@ -54,7 +54,7 @@ class generatorPage {
         @Override
         void run() {
 
-            File file = new File("Bass.wav")
+            File file = new File("src/main/resources/Bass.wav")
             int temp = 0
             while (true) {
                 temp = musician.tempoTrigerBass()
@@ -69,7 +69,7 @@ class generatorPage {
         @Override
         void run() {
 
-            File file = new File("forte.wav")
+            File file = new File("src/main/resources/forte.wav")
             int temp = 0
             while (true) {
                 temp = musician.tempoTrigerForte()
@@ -83,7 +83,7 @@ class generatorPage {
     Thread pianoTh = new Thread() {
         @Override
         void run() {
-            File file = new File("pad.wav")
+            File file = new File("src/main/resources/pad.wav")
             while (true) {
                 temp = musician.tempoTrigerBass()
                 piano.play(file, temp, musician.noteTrigerSpeedBass())
@@ -96,7 +96,7 @@ class generatorPage {
     Thread kickTh = new Thread() {
         @Override
         void run() {
-            File file = new File("Kick.wav")
+            File file = new File("src/main/resources/Kick.wav")
             while (true) {
                 kick.play(file, musician.tempoTrigerKick())
                 Thread.sleep(musician.tempoTrigerKick())
@@ -108,7 +108,7 @@ class generatorPage {
     Thread snareTh = new Thread() {
         @Override
         void run() {
-            File file = new File("Snare.wav")
+            File file = new File("src/main/resources/Snare.wav")
             while (true) {
                 snare.play(file, musician.tempoTrigerSnare())
                 Thread.sleep(musician.tempoTrigerSnare())
@@ -119,7 +119,7 @@ class generatorPage {
     Thread hatTh = new Thread() {
         @Override
         void run() {
-            File file = new File("Hat.wav")
+            File file = new File("src/main/resources/Hat.wav")
             while (true) {
                 hat.play(file, musician.tempoTrigerHat())
                 Thread.sleep(musician.tempoTrigerHat())
