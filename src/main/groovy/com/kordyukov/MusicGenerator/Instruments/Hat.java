@@ -29,7 +29,7 @@ public class Hat {
             e.printStackTrace();
         }
     }
-    void play(File file, int tempo) {
+    public void play(File file, int tempo) {
 
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);

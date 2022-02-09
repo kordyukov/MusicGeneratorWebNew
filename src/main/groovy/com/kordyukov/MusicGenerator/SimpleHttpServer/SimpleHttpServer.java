@@ -16,18 +16,22 @@ public class SimpleHttpServer {
     private HttpServer server;
 
 
-    void start() throws IOException {
-        HttpHandler httpHandler = new StaticFileHandler("src/main/resources/music/MusicGenerator.wav");
-        InetAddress addr = InetAddress.getLocalHost ();
-        InetSocketAddress socketAddress = new InetSocketAddress(addr,PORT);
-        //System.out.println("socketAddress.toString()" + socketAddress.toString());
-        server = HttpServer.create(socketAddress, 3);
+    public void start()  {
+        try {
+            HttpHandler httpHandler = new StaticFileHandler("src/main/resources/music/MusicGenerator.wav");
+            InetAddress addr = InetAddress.getLocalHost();
+            InetSocketAddress socketAddress = new InetSocketAddress(addr, PORT);
+            //System.out.println("socketAddress.toString()" + socketAddress.toString());
+            server = HttpServer.create(socketAddress, 3);
 
-        server.createContext("/", new StaticFileHandler("src/main/resources/music/MusicGenerator.wav"));
+            server.createContext("/", new StaticFileHandler("src/main/resources/music/MusicGenerator.wav"));
 
-        //System.out.println(" httpHandler " + httpHandler);
-        server.start();
-        System.out.println("server.start()");
+            //System.out.println(" httpHandler " + httpHandler);
+            server.start();
+            System.out.println("server.start()");
+        }catch (IOException e){
+            System.out.println(e);
+        }
     }
 
     public void stop() {

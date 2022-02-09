@@ -30,7 +30,7 @@ public class Piano {
         }
     }
 
-    void play(File file, int tempo, float note) {
+    public void play(File file, int tempo, float note) {
 
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
