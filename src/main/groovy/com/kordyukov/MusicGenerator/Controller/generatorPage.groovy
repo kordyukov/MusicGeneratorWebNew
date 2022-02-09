@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 
-import javax.lang.model.element.Element
 import javax.sound.sampled.AudioFileFormat
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioInputStream
@@ -22,8 +21,7 @@ import javax.sound.sampled.DataLine
 import javax.sound.sampled.LineUnavailableException
 import javax.sound.sampled.TargetDataLine
 import javax.swing.JOptionPane
-import javax.swing.text.Document
-import java.applet.AudioClip
+
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

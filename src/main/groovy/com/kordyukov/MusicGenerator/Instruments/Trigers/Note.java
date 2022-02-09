@@ -1,7 +1,7 @@
 package com.kordyukov.MusicGenerator.Instruments.Trigers;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
+
 
 @Data
 public class Note {
