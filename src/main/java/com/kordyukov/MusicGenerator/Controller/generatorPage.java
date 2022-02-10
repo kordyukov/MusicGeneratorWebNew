@@ -43,7 +43,6 @@ public class generatorPage {
     private Musician musician;
     private int temp = 0;
     private int attemptUser = 0;
-
     private boolean checkProject;
 
     private Thread bassTh = new Thread() {
@@ -54,6 +53,7 @@ public class generatorPage {
 
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
+            System.out.println("checkProject  bassTh " + checkProject);
 
 // File file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/forte.wav");
             int temp = 0;
@@ -229,8 +229,8 @@ public class generatorPage {
             }
         }
         catch (IOException e) {
+            checkProject = false;
         }
-        checkProject = true;
 
         return target;
     }
