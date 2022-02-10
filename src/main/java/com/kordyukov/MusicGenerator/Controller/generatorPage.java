@@ -169,12 +169,14 @@ public class generatorPage {
                 // микрофонный вход
                 TargetDataLine mike;
 
-                file = new File("src/main/resources/templates/MusicGenerator.wav");
+                file = new File(MusicGeneratorConst.baseDirIdea);
+
                 //file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/MusicGenerator.wav");
 
-
+                System.out.println("!file.exists()" + file.exists());
                 if (!file.exists()) {
                     file.createNewFile();
+                    System.out.println("create file: " + file.getName());
                 } else {
                     System.out.println("File already exists");
                 }
@@ -205,9 +207,8 @@ public class generatorPage {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "I/O Error " + ex, "I/O Error", JOptionPane.ERROR_MESSAGE);
                 }
-
+                System.out.println("socketRec ok!");
             }
-
         };
         private Thread serverStart = new Thread() {
             @Override
