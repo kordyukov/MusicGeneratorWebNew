@@ -44,6 +44,7 @@ public class generatorPage {
     private int temp = 0;
     private int attemptUser = 0;
     private boolean checkProject;
+    public static boolean checkBaseDirTomcat;
 
     private Thread bassTh = new Thread() {
         @SneakyThrows
@@ -55,7 +56,6 @@ public class generatorPage {
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
             System.out.println("checkProject  bassTh " + checkProject);
 
-// File file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/forte.wav");
             int temp = 0;
             while (true) {
                 temp = musician.tempoTrigerBass();
@@ -168,19 +168,23 @@ public class generatorPage {
                 AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, MONO, 2, 44100, true);
                 // микрофонный вход
                 TargetDataLine mike;
+                boolean isBaseDirIdea;
 
                 file = new File(MusicGeneratorConst.baseDirIdea);
 
-                //file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/MusicGenerator.wav");
+                isBaseDirIdea = file.exists();
 
-                System.out.println("!file.exists()" + file.exists());
-                if (!file.exists()) {
+                if (!isBaseDirIdea) {
                     file.createNewFile();
-                    System.out.println("create file: " + file.getName());
-                } else {
-                    System.out.println("File already exists");
+                    isBaseDirIdea = file.exists();
                 }
 
+                if (!isBaseDirIdea) {
+                    file = new File(MusicGeneratorConst.baseDirTomcat);
+                    checkBaseDirTomcat = true;
+                }
+
+                System.out.println("checkBaseDirTomcat " + checkBaseDirTomcat);
 
                 // линию соединения
                 DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
