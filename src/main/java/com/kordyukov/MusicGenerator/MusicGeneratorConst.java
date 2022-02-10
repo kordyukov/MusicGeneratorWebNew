@@ -12,4 +12,8 @@ public class MusicGeneratorConst {
     public static final int CHANNEL_SNARE = 9;
     public static final int HAT = 42;
     public static final int CHANNEL_HAT = 9;
+
+    public static final String pathIdea = "src";
+    public static final String pathTomcat = "webapps";
+
 }

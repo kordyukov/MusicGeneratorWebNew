@@ -1,6 +1,7 @@
 package com.kordyukov.MusicGenerator.Controller;
 
 import com.kordyukov.MusicGenerator.Instruments.*;
+import com.kordyukov.MusicGenerator.MusicGeneratorConst;
 import com.kordyukov.MusicGenerator.Musician;
 import com.kordyukov.MusicGenerator.SimpleHttpServer.SimpleHttpServer;
 import lombok.Data;
@@ -14,8 +15,13 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Stream;
 
 @Data
 @Controller
@@ -42,8 +48,10 @@ public class generatorPage {
         @SneakyThrows
         @Override
         public void run() {
+            File file;
 
-            File file = new File("src/main/resources/Bass.wav");
+            file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
+// File file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/forte.wav");
             int temp = 0;
             while (true) {
                 temp = musician.tempoTrigerBass();
@@ -57,8 +65,10 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
+                File file;
 
-                File file = new File("src/main/resources/forte.wav");
+                file = searchFile(MusicGeneratorConst.pathIdea,"forte.wav");
+
                 int temp = 0;
                 while (true) {
                     temp = musician.tempoTrigerForte();
@@ -73,7 +83,9 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-                File file = new File("src/main/resources/pad.wav");
+                File file;
+
+                file = searchFile(MusicGeneratorConst.pathIdea,"pad.wav");
                 while (true) {
                     temp = musician.tempoTrigerBass();
                     piano.play(file, temp, musician.noteTrigerSpeedBass());
@@ -88,7 +100,9 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-                File file = new File("src/main/resources/Kick.wav");
+                File file;
+
+                file = searchFile(MusicGeneratorConst.pathIdea,"Kick.wav");
                 while (true) {
                     kick.play(file, musician.tempoTrigerKick());
                     Thread.sleep(musician.tempoTrigerKick());
@@ -101,7 +115,9 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-                File file = new File("src/main/resources/Snare.wav");
+                File file;
+
+                file = searchFile(MusicGeneratorConst.pathIdea,"Snare.wav");
                 while (true) {
                     snare.play(file, musician.tempoTrigerSnare());
                     Thread.sleep(musician.tempoTrigerSnare());
@@ -114,7 +130,9 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-                File file = new File("src/main/resources/Hat.wav");
+                File file;
+
+                file = searchFile(MusicGeneratorConst.pathIdea,"Hat.wav");
                 while (true) {
                     hat.play(file, musician.tempoTrigerHat());
                     Thread.sleep(musician.tempoTrigerHat());
@@ -137,7 +155,8 @@ public class generatorPage {
                 AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, MONO, 2, 44100, true);
                 // микрофонный вход
                 TargetDataLine mike;
-                file = new File("src/main/resources/music/MusicGenerator.wav");
+
+                file = new File("src/main/resources/templates/MusicGenerator.wav");
 
                 if (!file.exists()) {
                     file.createNewFile();
@@ -183,6 +202,21 @@ public class generatorPage {
             }
 
         };
+
+    public File searchFile(String rootFolder, String fileName) {
+        File target = null;
+        Path root = Paths.get(rootFolder);
+        try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, (path, attr) ->
+                path.getFileName().toString().equals(fileName))) {
+            Optional<Path> path = stream.findFirst();
+            if(path.isPresent()) {
+                target = path.get().toFile();
+            }
+        }
+        catch (IOException e) {
+        }
+        return target;
+    }
 
         @GetMapping
         public String startPage() {
