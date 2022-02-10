@@ -44,6 +44,8 @@ public class generatorPage {
     private int temp = 0;
     private int attemptUser = 0;
 
+    private boolean checkProject;
+
     private Thread bassTh = new Thread() {
         @SneakyThrows
         @Override
@@ -51,7 +53,9 @@ public class generatorPage {
             File file;
 
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
-// File file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/forte.wav");
+            if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
+
+// File file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/forte.wav");
             int temp = 0;
             while (true) {
                 temp = musician.tempoTrigerBass();
@@ -68,6 +72,7 @@ public class generatorPage {
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"forte.wav");
+                if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"forte.wav");
 
                 int temp = 0;
                 while (true) {
@@ -86,6 +91,8 @@ public class generatorPage {
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"pad.wav");
+                if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"pad.wav");
+
                 while (true) {
                     temp = musician.tempoTrigerBass();
                     piano.play(file, temp, musician.noteTrigerSpeedBass());
@@ -103,6 +110,8 @@ public class generatorPage {
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"Kick.wav");
+                if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Kick.wav");
+
                 while (true) {
                     kick.play(file, musician.tempoTrigerKick());
                     Thread.sleep(musician.tempoTrigerKick());
@@ -118,6 +127,8 @@ public class generatorPage {
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"Snare.wav");
+                if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Snare.wav");
+
                 while (true) {
                     snare.play(file, musician.tempoTrigerSnare());
                     Thread.sleep(musician.tempoTrigerSnare());
@@ -133,6 +144,8 @@ public class generatorPage {
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"Hat.wav");
+                if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Hat.wav");
+
                 while (true) {
                     hat.play(file, musician.tempoTrigerHat());
                     Thread.sleep(musician.tempoTrigerHat());
@@ -157,6 +170,8 @@ public class generatorPage {
                 TargetDataLine mike;
 
                 file = new File("src/main/resources/templates/MusicGenerator.wav");
+                //file = new File("webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/MusicGenerator.wav");
+
 
                 if (!file.exists()) {
                     file.createNewFile();
@@ -215,6 +230,8 @@ public class generatorPage {
         }
         catch (IOException e) {
         }
+        checkProject = true;
+
         return target;
     }
 
