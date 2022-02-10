@@ -16,4 +16,7 @@ public class MusicGeneratorConst {
     public static final String pathIdea = "src";
     public static final String pathTomcat = "webapps";
 
+    public static final String baseDirTomcat = "webapps/MusicGenerator-0.0.1-SNAPSHOT/WEB-INF/classes/templates/MusicGenerator.wav";
+    public static final String baseDirIdea = "src/main/resources/templates/MusicGenerator.wav";
+
 }

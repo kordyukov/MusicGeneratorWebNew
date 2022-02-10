@@ -227,6 +227,7 @@ public class generatorPage {
             if(path.isPresent()) {
                 target = path.get().toFile();
             }
+            checkProject = true;
         }
         catch (IOException e) {
             checkProject = false;
@@ -256,7 +257,7 @@ public class generatorPage {
             }
 
 
-            attemptUser = attemptUser++;
+            attemptUser++;
 
             DefaultGroovyMethods.println(this, "attemptUser" + attemptUser);
             return "index";

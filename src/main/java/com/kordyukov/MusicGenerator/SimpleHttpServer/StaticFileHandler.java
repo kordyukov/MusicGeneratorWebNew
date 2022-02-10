@@ -25,6 +25,7 @@ public class StaticFileHandler implements HttpHandler {
             IOException e = null;
             System.out.println("ex.toString()" + ex.toString());
             URI uri = ex.getRequestURI();
+
             String name = new File(uri.getPath()).getName();
             File path = new File(baseDir, name);
 
