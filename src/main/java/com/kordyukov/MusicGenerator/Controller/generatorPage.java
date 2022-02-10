@@ -170,18 +170,20 @@ public class generatorPage {
                 TargetDataLine mike;
                 boolean isBaseDirIdea;
 
-                file = new File(MusicGeneratorConst.baseDirIdea);
+                Path path = Paths.get(MusicGeneratorConst.pathTomcat);
 
-                isBaseDirIdea = file.exists();
+                isBaseDirIdea = !Files.exists(path);
 
-                if (!isBaseDirIdea) {
-                    file.createNewFile();
-                    isBaseDirIdea = file.exists();
-                }
-
-                if (!isBaseDirIdea) {
+                if (isBaseDirIdea) {
+                    file = new File(MusicGeneratorConst.baseDirIdea);
+                    if (!file.exists()) file.createNewFile();
+                    checkBaseDirTomcat = false;
+                    System.out.println("isBaseDirIdea " + isBaseDirIdea);
+                } else {
                     file = new File(MusicGeneratorConst.baseDirTomcat);
+                    if (!file.exists()) file.createNewFile();
                     checkBaseDirTomcat = true;
+                    System.out.println("isBaseDirIdea " + isBaseDirIdea);
                 }
 
                 System.out.println("checkBaseDirTomcat " + checkBaseDirTomcat);
