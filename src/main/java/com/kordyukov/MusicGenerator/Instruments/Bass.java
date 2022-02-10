@@ -1,7 +1,7 @@
 package com.kordyukov.MusicGenerator.Instruments;
 
 import lombok.Data;
-import org.codehaus.groovy.runtime.DefaultGroovyMethods;
+
 
 import javax.sound.sampled.*;
 import java.io.File;

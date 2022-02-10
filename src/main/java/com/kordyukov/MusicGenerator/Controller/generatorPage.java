@@ -6,10 +6,11 @@ import com.kordyukov.MusicGenerator.Musician;
 import com.kordyukov.MusicGenerator.SimpleHttpServer.SimpleHttpServer;
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.codehaus.groovy.runtime.DefaultGroovyMethods;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -198,7 +199,7 @@ public class generatorPage {
                 try {
                     // получить подходящую линию
                     mike = (TargetDataLine) AudioSystem.getLine(info);
-                    DefaultGroovyMethods.println(this, "info.toString()" + info.toString());
+
                     // открываем линию соединения с указанным
                     // форматом и размером буфера
                     mike.open(format, mike.getBufferSize());
@@ -259,14 +260,12 @@ public class generatorPage {
                 pool.submit(serverStart);
             } else {
                 pool.shutdown();
-                DefaultGroovyMethods.println(this, "pool potoc " + DefaultGroovyMethods.getProperties(pool).toString());
+
                 attemptUser = 0;
             }
 
-
             attemptUser++;
 
-            DefaultGroovyMethods.println(this, "attemptUser" + attemptUser);
             return "index";
 
         }

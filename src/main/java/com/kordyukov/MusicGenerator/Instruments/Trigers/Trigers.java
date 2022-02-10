@@ -2,8 +2,7 @@ package com.kordyukov.MusicGenerator.Instruments.Trigers;
 
 import com.kordyukov.MusicGenerator.Musician;
 import lombok.Data;
-import org.codehaus.groovy.runtime.DefaultGroovyMethods;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.stream.IntStream;
 
@@ -29,39 +28,39 @@ public class Trigers implements Musician {
 
     public int tempoTrigerBass() {
         tempo = tempBass[(0 + (int) (Math.random() * 0))];
-        DefaultGroovyMethods.println(this, "temb bass " + tempo);
+
         return tempo * 4;
 
     }
 
     public int tempoTrigerForte() {
         tempo = tempForte[(0 + (int) (Math.random() * 0))];
-        DefaultGroovyMethods.println(this, "temb forte " + tempo);
+
         return tempo * 4;
 
     }
 
     public int tempoTrigerPiano() {
         tempo = tempPiano[(0 + (int) (Math.random() * 4))];
-        DefaultGroovyMethods.printf(this, "\ntemp piano " + tempo, new Object[0]);
+
         return tempo;
     }
 
     public int tempoTrigerKick() {
         tempoKick = tempKick[(0 + (int) (Math.random() * 1))];
-        DefaultGroovyMethods.printf(this, "\ntemp kick " + tempoKick, new Object[0]);
+
         return tempoKick;
     }
 
     public int tempoTrigerSnare() {
         tempoSnare = tempSnare[(0 + (int) (Math.random() * 1))];
-        DefaultGroovyMethods.printf(this, "\ntemp snare " + tempoSnare, new Object[0]);
+
         return tempoSnare;
     }
 
     public int tempoTrigerHat() {
         tempoHat = tempHat[(0 + (int) (Math.random() * 2))];
-        DefaultGroovyMethods.printf(this, "\ntemp Hat " + tempoHat, new Object[0]);
+
         return tempoHat;
     }
 
@@ -91,10 +90,10 @@ public class Trigers implements Musician {
         shans1  = 0 + (int) (Math.random() * 2);
 
         fort = shans1 == shans;
-        DefaultGroovyMethods.println(this, fort);
+
 
         if (!fort) {
-            DefaultGroovyMethods.println(this, "do return " + noteRand);
+
             noteRand = noteRand;
             return noteRand;
         } else {
@@ -110,10 +109,10 @@ public class Trigers implements Musician {
         int shans1 = 0 + (int) (Math.random() * 2);
 
         boolean fort = shans1 == shans;
-        DefaultGroovyMethods.println(this, fort);
+
 
         if (!fort) {
-            DefaultGroovyMethods.println(this, "do return " + noteRand);
+
             noteRand = noteRand;
             return noteRand;
         } else {
