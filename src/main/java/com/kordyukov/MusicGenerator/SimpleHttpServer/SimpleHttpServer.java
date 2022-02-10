@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SimpleHttpServer {
 
 
-    private static final int PORT = 9999;
+    private static final int PORT = 66;
 
     private HttpServer server;
 
