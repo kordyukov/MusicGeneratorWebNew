@@ -222,6 +222,15 @@ public class generatorPage {
             public void run() {
                 SimpleHttpServer server = new SimpleHttpServer();
                 server.start();
+                while (true){
+                  if (server.isExeption) {
+                      server.stop();
+                      System.out.println("Ошибка сервера Раздачи server.isExeption: " + server.isExeption + " !!!");
+                      server.start();
+                      System.out.println("Сервер запущен! server.start()");
+                  }
+                }
+
             }
 
         };

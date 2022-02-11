@@ -18,6 +18,7 @@ public class SimpleHttpServer {
     private static final int PORT = 66;
 
     private HttpServer server;
+    public boolean isExeption;
 
     public void start()  {
         try {
@@ -37,11 +38,11 @@ public class SimpleHttpServer {
                 server.createContext("/", new StaticFileHandler(MusicGeneratorConst.baseDirTomcat ));
                 System.out.println("SimpleHttpServer baseDirTomcat");
             }
-
-
             server.start();
             System.out.println("server.start()");
+            isExeption = false;
         }catch (IOException e){
+            isExeption = true;
             System.out.println(e);
         }
     }
