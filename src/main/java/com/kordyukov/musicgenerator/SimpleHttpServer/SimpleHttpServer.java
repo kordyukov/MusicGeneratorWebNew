@@ -18,10 +18,9 @@ public class SimpleHttpServer {
     private static final int PORT = 66;
 
     private HttpServer server;
-    public boolean isExeption;
 
     public void start()  {
-        isExeption = true;
+
         try {
             InetAddress addr = InetAddress.getLocalHost();
             InetSocketAddress socketAddress = new InetSocketAddress(addr, PORT);
@@ -41,7 +40,7 @@ public class SimpleHttpServer {
             }
             server.start();
             System.out.println("server.start()");
-            isExeption = false;
+
         }catch (IOException e){
             System.out.println(e);
         }
