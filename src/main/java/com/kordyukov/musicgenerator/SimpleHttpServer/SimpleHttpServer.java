@@ -21,6 +21,7 @@ public class SimpleHttpServer {
     public boolean isExeption;
 
     public void start()  {
+        isExeption = true;
         try {
             InetAddress addr = InetAddress.getLocalHost();
             InetSocketAddress socketAddress = new InetSocketAddress(addr, PORT);
@@ -42,7 +43,6 @@ public class SimpleHttpServer {
             System.out.println("server.start()");
             isExeption = false;
         }catch (IOException e){
-            isExeption = true;
             System.out.println(e);
         }
     }
