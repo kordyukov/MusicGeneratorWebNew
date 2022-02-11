@@ -24,7 +24,7 @@ public class SimpleHttpServer {
         try {
             InetAddress addr = InetAddress.getLocalHost();
             InetSocketAddress socketAddress = new InetSocketAddress(addr, PORT);
-            server = HttpServer.create(socketAddress, 3);
+            server = HttpServer.create(socketAddress, 0);
             boolean isBaseDirIdea;
 
             Path path = Paths.get(MusicGeneratorConst.pathTomcat);

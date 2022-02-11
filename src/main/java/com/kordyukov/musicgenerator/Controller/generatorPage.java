@@ -254,11 +254,11 @@ public class generatorPage {
                 pool.submit(bassTh);
                 pool.submit(pianoTh);
                 pool.submit(kickTh);
-// //       pool.submit(snareTh)
+               // pool.submit(bassTh);
                 pool.submit(hatTh);
-                //pool.submit(forteTh)
-                pool.submit(socketRec);
-                pool.submit(serverStart);
+               // pool.submit(forteTh);
+               // pool.submit(socketRec);
+                //pool.submit(serverStart);
             } else {
                 pool.shutdown();
 
