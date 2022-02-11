@@ -1,9 +1,9 @@
-package com.kordyukov.MusicGenerator.Controller;
+package com.kordyukov.musicgenerator.Controller;
 
-import com.kordyukov.MusicGenerator.Instruments.*;
-import com.kordyukov.MusicGenerator.MusicGeneratorConst;
-import com.kordyukov.MusicGenerator.Musician;
-import com.kordyukov.MusicGenerator.SimpleHttpServer.SimpleHttpServer;
+import com.kordyukov.musicgenerator.Instruments.*;
+import com.kordyukov.musicgenerator.MusicGeneratorConst;
+import com.kordyukov.musicgenerator.Musician;
+import com.kordyukov.musicgenerator.SimpleHttpServer.SimpleHttpServer;
 import lombok.Data;
 import lombok.SneakyThrows;
 

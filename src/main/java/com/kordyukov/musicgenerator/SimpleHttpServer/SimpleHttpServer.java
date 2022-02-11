@@ -1,14 +1,12 @@
-package com.kordyukov.MusicGenerator.SimpleHttpServer;
+package com.kordyukov.musicgenerator.SimpleHttpServer;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
-import com.kordyukov.MusicGenerator.Controller.generatorPage;
-import com.kordyukov.MusicGenerator.MusicGeneratorConst;
-import com.sun.net.httpserver.HttpHandler;
+import com.kordyukov.musicgenerator.Controller.generatorPage;
+import com.kordyukov.musicgenerator.MusicGeneratorConst;
 import com.sun.net.httpserver.HttpServer;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @SuppressWarnings("restriction")
 public class SimpleHttpServer {

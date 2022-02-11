@@ -1,6 +1,6 @@
-package com.kordyukov.MusicGenerator.Instruments;
+package com.kordyukov.musicgenerator.Instruments;
 
-import com.kordyukov.MusicGenerator.MusicGeneratorConst;
+import com.kordyukov.musicgenerator.MusicGeneratorConst;
 import lombok.Data;
 
 import javax.sound.midi.MidiChannel;
@@ -10,26 +10,25 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 @Data
-public class Snare {
-    private int note = 38;
+public class Hat {
+    private int note = 42;
     private int temp;
     private int volume;
 
-    public void playSnare(int temp, int volume) {
+    public void playHat(int temp, int volume) {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
             synth.open();
             MidiChannel[] channels = synth.getChannels();
-            channels[MusicGeneratorConst.CHANNEL_SNARE].programChange(MusicGeneratorConst.SNARE);
-            channels[MusicGeneratorConst.CHANNEL_SNARE].noteOn(note, volume);
+            channels[MusicGeneratorConst.CHANNEL_HAT].programChange(MusicGeneratorConst.HAT);
+            channels[MusicGeneratorConst.CHANNEL_HAT].noteOn(note, volume);
             Thread.sleep(temp); // in milliseconds
-            channels[MusicGeneratorConst.CHANNEL_SNARE].noteOff(note);
+            channels[MusicGeneratorConst.CHANNEL_HAT].noteOff(note);
             synth.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     public void play(File file, int tempo) {
 
         try {
@@ -38,8 +37,8 @@ public class Snare {
             AudioFormat format = new AudioFormat((float) (formatIn.getSampleRate()*1.0), formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
             //a = a + 0.01;
 
-            System.out.println(formatIn.toString());
-            System.out.println(format.toString());
+//            System.out.println(formatIn.toString());
+//            System.out.println(format.toString());
             byte[] data = new byte[1024];
             DataLine.Info dinfo = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine line = (SourceDataLine)AudioSystem.getLine(dinfo);

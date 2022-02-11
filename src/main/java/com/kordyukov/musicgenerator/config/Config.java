@@ -1,15 +1,15 @@
-package com.kordyukov.MusicGenerator.config;
+package com.kordyukov.musicgenerator.config;
 
-import com.kordyukov.MusicGenerator.Instruments.*;
-import com.kordyukov.MusicGenerator.Instruments.Trigers.Note;
-import com.kordyukov.MusicGenerator.Instruments.Trigers.Trigers;
+import com.kordyukov.musicgenerator.Instruments.*;
+import com.kordyukov.musicgenerator.Instruments.Trigers.Note;
+import com.kordyukov.musicgenerator.Instruments.Trigers.Trigers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-@ComponentScan("com.kordyukov.MusicGenerator")
+@ComponentScan("com.kordyukov.musicgenerator")
 public class Config {
     @Bean
     @Scope("prototype")

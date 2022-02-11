@@ -1,12 +1,12 @@
-package com.kordyukov.MusicGenerator.Instruments.Trigers;
+package com.kordyukov.musicgenerator.Instruments.Trigers;
 
-import com.kordyukov.MusicGenerator.Musician;
+import com.kordyukov.musicgenerator.Musician;
 import lombok.Data;
 
 
 import java.util.stream.IntStream;
 
-import static com.kordyukov.MusicGenerator.Instruments.Trigers.Note.notes;
+import static com.kordyukov.musicgenerator.Instruments.Trigers.Note.notes;
 
 @Data
 public class Trigers implements Musician {

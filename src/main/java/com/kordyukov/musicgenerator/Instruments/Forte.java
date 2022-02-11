@@ -1,4 +1,4 @@
-package com.kordyukov.MusicGenerator.Instruments;
+package com.kordyukov.musicgenerator.Instruments;
 
 
 

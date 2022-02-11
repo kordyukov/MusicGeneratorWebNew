@@ -1,4 +1,4 @@
-package com.kordyukov.MusicGenerator;
+package com.kordyukov.musicgenerator;
 
 public class MusicGeneratorConst {
     public static final int BASS = 33;

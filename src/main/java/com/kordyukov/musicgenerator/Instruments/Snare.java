@@ -1,6 +1,6 @@
-package com.kordyukov.MusicGenerator.Instruments;
+package com.kordyukov.musicgenerator.Instruments;
 
-import com.kordyukov.MusicGenerator.MusicGeneratorConst;
+import com.kordyukov.musicgenerator.MusicGeneratorConst;
 import lombok.Data;
 
 import javax.sound.midi.MidiChannel;
@@ -10,36 +10,36 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 @Data
-public class Piano {
-    private int note;
+public class Snare {
+    private int note = 38;
     private int temp;
     private int volume;
 
-    public void playPiano(int note, int temp, int volume) {
+    public void playSnare(int temp, int volume) {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
             synth.open();
             MidiChannel[] channels = synth.getChannels();
-            channels[0].programChange(MusicGeneratorConst.PIANO);
-            channels[MusicGeneratorConst.CHANNEL_PIANO].noteOn(note, volume);
+            channels[MusicGeneratorConst.CHANNEL_SNARE].programChange(MusicGeneratorConst.SNARE);
+            channels[MusicGeneratorConst.CHANNEL_SNARE].noteOn(note, volume);
             Thread.sleep(temp); // in milliseconds
-            channels[MusicGeneratorConst.CHANNEL_PIANO].noteOff(note);
+            channels[MusicGeneratorConst.CHANNEL_SNARE].noteOff(note);
             synth.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void play(File file, int tempo, float note) {
+    public void play(File file, int tempo) {
 
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             AudioFormat formatIn = audioInputStream.getFormat();
-            AudioFormat format = new AudioFormat(formatIn.getSampleRate()*note, formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
+            AudioFormat format = new AudioFormat((float) (formatIn.getSampleRate()*1.0), formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
             //a = a + 0.01;
 
-//            System.out.println(formatIn.toString());
-//            System.out.println(format.toString());
+            System.out.println(formatIn.toString());
+            System.out.println(format.toString());
             byte[] data = new byte[1024];
             DataLine.Info dinfo = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine line = (SourceDataLine)AudioSystem.getLine(dinfo);
