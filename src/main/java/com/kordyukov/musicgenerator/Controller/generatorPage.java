@@ -175,8 +175,10 @@ public class generatorPage {
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea, "hats.wav");
+                if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"hats.wav");
 
                 FortePiano fortePiano = new FortePiano();
+
                 while (true) {
                     temp = musician.tempoTrigerFortePiano() * 2;
                     fortePiano.play(file, temp, musician.noteTrigerFortePiano());
