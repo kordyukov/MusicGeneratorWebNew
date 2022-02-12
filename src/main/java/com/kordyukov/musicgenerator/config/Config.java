@@ -1,5 +1,6 @@
 package com.kordyukov.musicgenerator.config;
 
+import com.kordyukov.musicgenerator.FortePiano;
 import com.kordyukov.musicgenerator.Instruments.*;
 import com.kordyukov.musicgenerator.Instruments.Trigers.Note;
 import com.kordyukov.musicgenerator.Instruments.Trigers.Trigers;
@@ -51,5 +52,8 @@ public class Config {
     public Forte forte() {
         return new Forte();
     }
+    @Bean
+    public FortePiano fortePiano(){ return new FortePiano();}
+
 
 }

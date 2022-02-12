@@ -20,4 +20,7 @@ public interface Musician {
     public  int tempoTrigerForte();
 
     public  float noteTrigerSpeedForte();
+
+    public  int tempoTrigerFortePiano();
+    public float noteTrigerFortePiano();
 }

@@ -2,6 +2,7 @@ package com.kordyukov.musicgenerator.Instruments.Trigers;
 
 import com.kordyukov.musicgenerator.Musician;
 import lombok.Data;
+import lombok.SneakyThrows;
 
 
 import java.util.stream.IntStream;
@@ -17,6 +18,8 @@ public class Trigers implements Musician {
     private int[] tempPiano = IntStream.of(100, 200, 400, 800, 1600).toArray();
     private int[] tempSnare = IntStream.of(650).toArray();
     private int[] tempHat = IntStream.of(162, 325, 650).toArray();
+    private int[] tempFortePiano = IntStream.of(325).toArray();
+
     float [] noteSpeed = new float[] {0.50f, 0.56f, 0.63f, 0.66f, 0.75f, 0.84f, 0.94f, 1.0f ,1.12f, 1.27f, 1.34f, 1.50f, 1.66f, 1.86f, 1.98f};
     private int tempo;
     private int tempo1;
@@ -62,6 +65,11 @@ public class Trigers implements Musician {
         tempoHat = tempHat[(0 + (int) (Math.random() * 2))];
 
         return tempoHat;
+    }
+
+    public  int tempoTrigerFortePiano(){
+       int tempFortePianos =  tempFortePiano[0];
+       return tempFortePianos;
     }
 
     public int noteTrigerBass() {
@@ -130,4 +138,18 @@ public class Trigers implements Musician {
         return note;
     }
 
+    @SneakyThrows
+    public float noteTrigerFortePiano()  {
+        float note;
+        note = noteSpeed[0 + (int) (Math.random() * 6)];
+        int p1,p2;
+        p1 = 0 + (int) (Math.random() * 1);
+        p2 =  0 + (int) (Math.random() * 1);
+        if(p1 == p2) {
+            return note * 2;
+        }
+
+        return note;
+
+    }
 }

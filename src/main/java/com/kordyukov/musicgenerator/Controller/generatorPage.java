@@ -1,5 +1,6 @@
 package com.kordyukov.musicgenerator.Controller;
 
+import com.kordyukov.musicgenerator.FortePiano;
 import com.kordyukov.musicgenerator.Instruments.*;
 import com.kordyukov.musicgenerator.MusicGeneratorConst;
 import com.kordyukov.musicgenerator.Musician;
@@ -42,6 +43,9 @@ public class generatorPage {
     private Forte forte;
     @Autowired
     private Musician musician;
+    @Autowired
+    FortePiano fortePiano;
+
     private int temp = 0;
     private int attemptUser = 0;
     private boolean checkProject;
@@ -70,6 +74,12 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
+//                FortePiano fortePiano = new FortePiano();
+//                while (true) {
+//                    temp = musician.tempoTrigerBass();
+//                    fortePiano.PlayPiano();
+//                    Thread.sleep(temp);
+//                }
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"forte.wav");
@@ -155,6 +165,25 @@ public class generatorPage {
 
             }
 
+        };
+
+        private Thread FortePiano = new Thread() {
+
+            @SneakyThrows
+            @Override
+            public void run() {
+                File file;
+
+                file = searchFile(MusicGeneratorConst.pathIdea, "hats.wav");
+
+                FortePiano fortePiano = new FortePiano();
+                while (true) {
+                    temp = musician.tempoTrigerFortePiano() * 2;
+                    fortePiano.play(file, temp, musician.noteTrigerFortePiano());
+                    Thread.sleep(temp);
+                }
+
+            }
         };
         private Thread socketRec = new Thread() {
             @SneakyThrows
@@ -256,7 +285,8 @@ public class generatorPage {
                 pool.submit(kickTh);
                // pool.submit(bassTh);
                 pool.submit(hatTh);
-               // pool.submit(forteTh);
+                pool.submit(forteTh);
+                pool.submit(FortePiano);
                // pool.submit(socketRec);
                 //pool.submit(serverStart);
             } else {
