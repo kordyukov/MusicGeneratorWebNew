@@ -33,7 +33,6 @@ public class Trigers implements Musician {
         tempo = tempBass[(0 + (int) (Math.random() * 0))];
 
         return tempo * 4;
-
     }
 
     public int tempoTrigerForte() {
@@ -50,7 +49,17 @@ public class Trigers implements Musician {
     }
 
     public int tempoTrigerKick() {
-        tempoKick = tempKick[(0 + (int) (Math.random() * 2))];
+        int p1,p2,p3;
+        p1 = (int) (Math.random() * 3);
+        p2 = (int) (Math.random() * 3);
+        p3 = (int) (Math.random() * 3);
+
+        if (p1==p2 && p2==p3){
+            tempoKick = tempKick[(1 + (int) (Math.random() * 2))];
+            System.out.println(p1+"-" + p2 + "-" + p3);
+        }else {
+            tempoKick = tempKick[(0 + (int) (Math.random() * 2))];
+        }
 
         return tempoKick;
     }
