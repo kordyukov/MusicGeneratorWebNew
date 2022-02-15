@@ -32,11 +32,12 @@ public class StaticFileHandler implements HttpHandler {
             Headers h = ex.getResponseHeaders();
             // Could be more clever about the content type based on the filename here.
             h.add("Content-Type", "audio/wav");
-
+            System.out.println("handle");
             OutputStream out = ex.getResponseBody();
 
             if (path.exists()) {
                 ex.sendResponseHeaders(200, path.length());
+                System.out.println("Files.readAllBytes(path.toPath())");
                 out.write(Files.readAllBytes(path.toPath()));
             } else {
                 System.err.println("File not found: " + path.getAbsolutePath());

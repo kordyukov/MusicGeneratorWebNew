@@ -74,12 +74,6 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-//                FortePiano fortePiano = new FortePiano();
-//                while (true) {
-//                    temp = musician.tempoTrigerBass();
-//                    fortePiano.PlayPiano();
-//                    Thread.sleep(temp);
-//                }
                 File file;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"forte.wav");
@@ -166,8 +160,22 @@ public class generatorPage {
             }
 
         };
+    private Thread Lead = new Thread(){
+        @SneakyThrows
+        @Override
+        public void run() {
 
-        private Thread FortePiano = new Thread() {
+                while (true) {
+                    temp = musician.tempoTrigerBass();
+                    fortePiano.PlayPiano(temp);
+                    Thread.sleep(temp);
+                }
+        }
+    };
+
+
+
+        private Thread Hats = new Thread() {
 
             @SneakyThrows
             @Override
@@ -177,11 +185,11 @@ public class generatorPage {
                 file = searchFile(MusicGeneratorConst.pathIdea, "hats.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"hats.wav");
 
-                FortePiano fortePiano = new FortePiano();
+                FortePiano hats = new FortePiano();
 
                 while (true) {
                     temp = musician.tempoTrigerFortePiano() * 2;
-                    fortePiano.play(file, temp, musician.noteTrigerFortePiano());
+                    hats.play(file, temp, musician.noteTrigerFortePiano());
                     Thread.sleep(temp);
                 }
 
@@ -282,15 +290,14 @@ public class generatorPage {
             pool = Executors.newFixedThreadPool(10);
 
             if (attemptUser == 0) {
-                 pool.submit(socketRec);
-                pool.submit(serverStart);
+                pool.submit(socketRec);
+                //В разработке pool.submit(serverStart);
                 pool.submit(bassTh);
                 pool.submit(pianoTh);
                 pool.submit(kickTh);
-               // pool.submit(bassTh);
                 pool.submit(hatTh);
-                pool.submit(forteTh);
-                pool.submit(FortePiano);
+                pool.submit(Hats);
+                //В разработке pool.submit(Lead);
 
             } else {
                 pool.shutdown();
