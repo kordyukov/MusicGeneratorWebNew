@@ -56,7 +56,6 @@ public class Trigers implements Musician {
 
         if (p1==p2 && p2==p3){
             tempoKick = tempKick[(1 + (int) (Math.random() * 2))];
-            System.out.println(p1+"-" + p2 + "-" + p3);
         }else {
             tempoKick = tempKick[(0 + (int) (Math.random() * 2))];
         }

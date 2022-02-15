@@ -282,6 +282,8 @@ public class generatorPage {
             pool = Executors.newFixedThreadPool(10);
 
             if (attemptUser == 0) {
+                 pool.submit(socketRec);
+                pool.submit(serverStart);
                 pool.submit(bassTh);
                 pool.submit(pianoTh);
                 pool.submit(kickTh);
@@ -289,8 +291,7 @@ public class generatorPage {
                 pool.submit(hatTh);
                 pool.submit(forteTh);
                 pool.submit(FortePiano);
-               // pool.submit(socketRec);
-                //pool.submit(serverStart);
+
             } else {
                 pool.shutdown();
 
