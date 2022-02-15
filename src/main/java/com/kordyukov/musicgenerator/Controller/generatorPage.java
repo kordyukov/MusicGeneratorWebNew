@@ -55,16 +55,19 @@ public class generatorPage {
         @SneakyThrows
         @Override
         public void run() {
-            File file;
+            File file,file1;
 
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
+            file1 = searchFile(MusicGeneratorConst.pathIdea,"lead.wav");
+            if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"lead.wav");
             System.out.println("checkProject  bassTh " + checkProject);
 
             int temp = 0;
             while (true) {
                 temp = musician.tempoTrigerBass();
                 bass.play(file, temp, musician.noteTrigerSpeedBass());
+                //bass.play(file1, temp, musician.noteTrigerSpeedBass());
                 Thread.sleep(temp);
             }
         }
@@ -297,6 +300,7 @@ public class generatorPage {
                 pool.submit(kickTh);
                 pool.submit(hatTh);
                 pool.submit(Hats);
+                pool.submit(forteTh);
                 //В разработке pool.submit(Lead);
 
             } else {
