@@ -59,15 +59,15 @@ public class generatorPage {
 
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
-            file1 = searchFile(MusicGeneratorConst.pathIdea,"lead.wav");
-            if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"lead.wav");
+            file1 = searchFile(MusicGeneratorConst.pathIdea,"Bass1.wav");
+            if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"Bass1.wav");
             System.out.println("checkProject  bassTh " + checkProject);
 
             int temp = 0;
             while (true) {
                 temp = musician.tempoTrigerBass();
                 bass.play(file, temp, musician.noteTrigerSpeedBass());
-                //bass.play(file1, temp, musician.noteTrigerSpeedBass());
+               // bass.play(file1, temp, musician.noteTrigerSpeedBass());
                 Thread.sleep(temp);
             }
         }
