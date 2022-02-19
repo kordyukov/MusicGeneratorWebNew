@@ -59,9 +59,9 @@ public class generatorPage {
 
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
-            file1 = searchFile(MusicGeneratorConst.pathIdea,"Bass1.wav");
+            file1 = searchFile(MusicGeneratorConst.pathIdea,"Snare.wav");
             if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"Bass1.wav");
-            System.out.println("checkProject  bassTh " + checkProject);
+            //System.out.println("checkProject  bassTh " + checkProject);
 
             int temp = 0;
             while (true) {
@@ -86,6 +86,7 @@ public class generatorPage {
                 while (true) {
                     temp = musician.tempoTrigerForte();
                     forte.play(file, temp, musician.noteTrigerSpeedForte());
+                   // forte.play(file, temp, musician.noteTrigerSpeedForte());
                     Thread.sleep(temp);
                 }
 
@@ -104,6 +105,7 @@ public class generatorPage {
                 while (true) {
                     temp = musician.tempoTrigerBass();
                     piano.play(file, temp, musician.noteTrigerSpeedBass());
+                    piano.play(file, temp, musician.noteTrigerSpeedBass());
                     Thread.sleep(temp);
                 }
 
@@ -120,9 +122,11 @@ public class generatorPage {
                 file = searchFile(MusicGeneratorConst.pathIdea,"Kick.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Kick.wav");
 
+
                 while (true) {
                     kick.play(file, musician.tempoTrigerKick());
                     Thread.sleep(musician.tempoTrigerKick());
+
                 }
 
             }
@@ -138,13 +142,32 @@ public class generatorPage {
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Snare.wav");
 
                 while (true) {
-                    snare.play(file, musician.tempoTrigerSnare());
-                    Thread.sleep(musician.tempoTrigerSnare());
+                    snare.play(file, musician.tempoTrigerKick());
+                    Thread.sleep(musician.tempoTrigerKick());
                 }
 
             }
 
         };
+
+    private Thread clapTh = new Thread() {
+        @SneakyThrows
+        @Override
+        public void run() {
+            File file;
+
+            file = searchFile(MusicGeneratorConst.pathIdea,"clap.wav");
+            if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"clap.wav");
+
+            while (true) {
+                snare.play(file, musician.tempoTrigerSnare());
+                Thread.sleep(musician.tempoTrigerSnare());
+            }
+
+        }
+
+    };
+
         private Thread hatTh = new Thread() {
             @SneakyThrows
             @Override
@@ -168,11 +191,22 @@ public class generatorPage {
         @Override
         public void run() {
 
-                while (true) {
-                    temp = musician.tempoTrigerBass();
-                    fortePiano.PlayPiano(temp);
-                    Thread.sleep(temp);
-                }
+//                while (true) {
+//                    temp = musician.tempoTrigerBass();
+//                    fortePiano.PlayPiano(temp);
+//                    Thread.sleep(temp);
+//                }
+            File file;
+
+            file = searchFile(MusicGeneratorConst.pathIdea,"lead.wav");
+            if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"lead.wav");
+
+            while (true) {
+                temp = musician.tempoTrigerBass();
+                piano.play(file, temp, musician.noteTrigerSpeedBass());
+                piano.play(file, temp, musician.noteTrigerSpeedBass());
+                Thread.sleep(temp*2);
+            }
         }
     };
 
@@ -293,7 +327,7 @@ public class generatorPage {
             pool = Executors.newFixedThreadPool(10);
 
             if (attemptUser == 0) {
-                pool.submit(socketRec);
+                //pool.submit(socketRec);
                 //В разработке pool.submit(serverStart);
                 pool.submit(bassTh);
                 pool.submit(pianoTh);
@@ -301,7 +335,9 @@ public class generatorPage {
                 pool.submit(hatTh);
                 pool.submit(Hats);
                 pool.submit(forteTh);
-                //В разработке pool.submit(Lead);
+                pool.submit(snareTh);
+                pool.submit(clapTh);
+                pool.submit(Lead);
 
             } else {
                 pool.shutdown();
