@@ -26,21 +26,19 @@ public class FortePiano {
             MidiChannel[] channels = synth5.getChannels();
             channels[6].programChange(2);
 
-            for(byte vremya = 0; vremya < 10; vremya = vremya) {
-                for(int p = 0; p <= pPiano.udari; ++p) {
-                    PianoRythm.notei = pPiano.note[pPiano.a + (int)(Math.random() * (double)(pPiano.bn - pPiano.a + 1))];
-                    channels[6].noteOn(PianoRythm.notei, volume);
-                    Thread.sleep(rytmi);
-                    channels[6].noteOff(PianoRythm.notei);
-                }
 
-                pPiano.randomPiano();
-                int var6 = vremya + 1;
-            }
-        } catch (Exception var5) {
-            var5.printStackTrace();
+            PianoRythm.notei = pPiano.note[pPiano.a + (int) (Math.random() * (double) (pPiano.bn - pPiano.a + 1))];
+            channels[6].noteOn(PianoRythm.notei, volume);
+            Thread.sleep(rytmi);
+            channels[6].noteOff(PianoRythm.notei);
+
+
+            pPiano.randomPiano();
+
+        } catch(Exception e)
+        {
+            System.out.println(e);
         }
-
     }
 
     public void play(File file, int tempo, float note) {

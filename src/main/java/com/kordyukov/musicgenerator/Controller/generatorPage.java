@@ -57,17 +57,20 @@ public class generatorPage {
         public void run() {
             File file,file1;
 
+
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
-            file1 = searchFile(MusicGeneratorConst.pathIdea,"Snare.wav");
-            if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"Bass1.wav");
+            file1 = searchFile(MusicGeneratorConst.pathIdea,"Tom.wav");
+            if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"Tom.wav");
             //System.out.println("checkProject  bassTh " + checkProject);
 
             int temp = 0;
+            float note;
             while (true) {
                 temp = musician.tempoTrigerBass();
-                bass.play(file, temp, musician.noteTrigerSpeedBass());
-               // bass.play(file1, temp, musician.noteTrigerSpeedBass());
+                note = musician.noteTrigerSpeedBass();
+                bass.play(file, temp, note);
+                bass.play(file1, temp, note);
                 Thread.sleep(temp);
             }
         }
@@ -77,15 +80,18 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-                File file;
+                File file,file1;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"forte.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"forte.wav");
+                file1 = searchFile(MusicGeneratorConst.pathIdea,"forte1.wav");
+                if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"forte1.wav");
 
                 int temp = 0;
                 while (true) {
                     temp = musician.tempoTrigerForte();
-                    forte.play(file, temp, musician.noteTrigerSpeedForte());
+                    //forte.play(file, temp, musician.noteTrigerSpeedForte());
+                    forte.play(file1, temp, musician.noteTrigerSpeedForte());
                    // forte.play(file, temp, musician.noteTrigerSpeedForte());
                     Thread.sleep(temp);
                 }
@@ -321,10 +327,21 @@ public class generatorPage {
         return target;
     }
 
+//    Thread pianoP = new Thread(){
+//        @SneakyThrows
+//        @Override
+//        public void run() {
+//            while (true){
+//                fortePiano.PlayPiano(1300);
+//                Thread.sleep(1300);
+//            }
+//        }
+//    };
+
         @GetMapping
         public String startPage() {
             ExecutorService pool;
-            pool = Executors.newFixedThreadPool(10);
+            pool = Executors.newFixedThreadPool(11);
 
             if (attemptUser == 0) {
                 //pool.submit(socketRec);
@@ -337,7 +354,8 @@ public class generatorPage {
                 pool.submit(forteTh);
                 pool.submit(snareTh);
                 pool.submit(clapTh);
-                pool.submit(Lead);
+                //pool.submit(Lead);
+               // pool.submit(pianoP);
 
             } else {
                 pool.shutdown();
