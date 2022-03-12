@@ -50,7 +50,8 @@ public class generatorPage {
     private int attemptUser = 0;
     private boolean checkProject;
     public static boolean checkBaseDirTomcat;
-    public boolean leadPlay;
+    private boolean leadPlay;
+    private boolean kickPlay;
 
 
     Thread tomTh = new Thread(){
@@ -82,11 +83,14 @@ public class generatorPage {
             int temp = 0;
             float note;
             while (true) {
-                temp = musician.tempoTrigerBass();
+                if(!kickPlay) {
+                    temp = musician.tempoTrigerBass();
                     note = musician.noteTrigerSpeedBass();
                     bass.play(file, temp, note);
                     Thread.sleep(temp);
                     leadPlay = true;
+                    kickPlay = true;
+                }
             }
         }
     };
@@ -146,8 +150,11 @@ public class generatorPage {
 
 
                 while (true) {
+                    if (kickPlay) {
                         kick.play(file, musician.tempoTrigerKick());
                         Thread.sleep(musician.tempoTrigerKick());
+                        kickPlay = false;
+                    }
                 }
 
             }
@@ -365,9 +372,11 @@ public class generatorPage {
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
+                pool.submit(pianoTh);
                 pool.submit(kickTh);
                 pool.submit(hatTh);
                 pool.submit(Hats);
+                pool.submit(forteTh);
                 pool.submit(forteTh);
                 pool.submit(forteTh);
                 pool.submit(snareTh);

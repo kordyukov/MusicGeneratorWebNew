@@ -16,7 +16,7 @@ public class Trigers implements Musician {
     private int[] tempForte = IntStream.of(50, 200, 400).toArray();
     private int[] tempKick = IntStream.of(325,650,975,1300).toArray();
     private int[] tempPiano = IntStream.of(100, 200, 400, 800, 1600).toArray();
-    private int[] tempSnare = IntStream.of(650).toArray();
+    private int[] tempSnare = IntStream.of(650,1300).toArray();
     private int[] tempHat = IntStream.of(162, 325, 650).toArray();
     private int[] tempFortePiano = IntStream.of(325).toArray();
 
@@ -49,20 +49,21 @@ public class Trigers implements Musician {
     }
 
     public int tempoTrigerKick() {
-        int p1,p2;
+        int p1,p2,p3;
         boolean check;
-        p1 = (int) (Math.random() * 3);
-        p2 = (int) (Math.random() * 3);
+        p1 = (int) (Math.random() * 9);
+        p2 = (int) (Math.random() * 9);
+
 
         check = p1==p2;
 
-            tempoKick = check ? tempKick[(0 + (int) (Math.random() * 2))]: tempKick[(0 + (int) (Math.random() * 1))];
+            tempoKick = !check ? tempKick[(0 + (int) (Math.random() * 1))]: tempKick[(0 + (int) (Math.random() * 3))];
 
         return tempoKick;
     }
 
     public int tempoTrigerSnare() {
-        tempoSnare = tempSnare[(0 + (int) (Math.random() * 0))];
+        tempoSnare = tempSnare[(0 + (int) (Math.random() * 1))];
 
         return tempoSnare;
     }
@@ -70,12 +71,12 @@ public class Trigers implements Musician {
     public int tempoTrigerHat() {
         int p1,p2;
         boolean check;
-        p1 = (int) (Math.random() * 3);
-        p2 = (int) (Math.random() * 3);
+        p1 = (int) (Math.random() * 9);
+        p2 = (int) (Math.random() * 9);
 
         check = p1==p2;
 
-        tempoHat = check ? tempHat[(0 + (int) (Math.random() * 2))] : tempHat[(0 + (int) (Math.random() * 1))];
+        tempoHat = !check ? tempHat[(0 + (int) (Math.random() * 2))] : tempHat[(0 + (int) (Math.random() * 1))];
 
         return tempoHat;
     }
