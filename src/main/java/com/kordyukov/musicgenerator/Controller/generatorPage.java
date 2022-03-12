@@ -109,7 +109,7 @@ public class generatorPage {
                 int temp = 0;
                 while (true) {
                     temp = musician.tempoTrigerForte();
-                    forte.play(file, temp, musician.noteTrigerSpeedForte());
+                    forte.play(file, temp,  musician.noteTrigerSpeedForte());
                     forte.play(file, temp, musician.noteTrigerSpeedForte());
                     //forte.play(file1, temp, musician.noteTrigerSpeedForte());
                    // forte.play(file, temp, musician.noteTrigerSpeedForte());
