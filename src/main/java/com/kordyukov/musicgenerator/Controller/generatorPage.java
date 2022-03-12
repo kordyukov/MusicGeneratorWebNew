@@ -50,7 +50,7 @@ public class generatorPage {
     private int attemptUser = 0;
     private boolean checkProject;
     public static boolean checkBaseDirTomcat;
-    public boolean kickPlay;
+    public boolean leadPlay;
 
 
     Thread tomTh = new Thread(){
@@ -86,6 +86,7 @@ public class generatorPage {
                     note = musician.noteTrigerSpeedBass();
                     bass.play(file, temp, note);
                     Thread.sleep(temp);
+                    leadPlay = true;
             }
         }
     };
@@ -125,7 +126,7 @@ public class generatorPage {
 
                 while (true) {
                     temp = musician.tempoTrigerBass();
-                    piano.play(file, temp, kickPlay ? musician.noteTrigerSpeedBass() : musician.noteTrigerSpeedBass()*2);
+                    piano.play(file, temp, leadPlay ? musician.noteTrigerSpeedBass() : musician.noteTrigerSpeedBass()*2);
                     //piano.play(file, temp, musician.noteTrigerSpeedBass());
                     Thread.sleep(temp);
                 }
