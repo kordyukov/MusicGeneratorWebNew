@@ -51,6 +51,7 @@ public class generatorPage {
     private int attemptUser = 0;
     private boolean checkProject;
     public static boolean checkBaseDirTomcat;
+
     boolean leadPlay = false;
 
     Thread tomTh = new Thread(){
@@ -90,7 +91,7 @@ public class generatorPage {
                         e.printStackTrace();
                     }
                     System.out.println("play bass");
-                    leadPlay = true;
+
 
             }
         }
@@ -122,15 +123,17 @@ public class generatorPage {
             @Override
             public void run() {
                 File file;
-
+                
                 file = searchFile(MusicGeneratorConst.pathIdea,"pad.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"pad.wav");
 
                 while (true) {
+
                     temp = musician.tempoTrigerBass();
                     piano.play(file, temp, leadPlay ? musician.noteTrigerSpeedBass() : musician.noteTrigerSpeedBass()*2);
                     //piano.play(file, temp, musician.noteTrigerSpeedBass());
                     Thread.sleep(temp);
+                    leadPlay = true;
                 }
 
 
@@ -140,12 +143,16 @@ public class generatorPage {
         private Thread kickTh = new Thread() {
             @Override
             public void run() {
-                File file,file1;
+                File file,file1,file2;
                 file1 = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
                 if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"Kick.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Kick.wav");
+
+                file2 = searchFile(MusicGeneratorConst.pathIdea,"Bass1.wav");
+                if (!checkProject) file2 = searchFile(MusicGeneratorConst.pathTomcat,"Bass1.wav");
+
                 int temp;
                 float note;
                 boolean kickPlay = false;
@@ -159,19 +166,18 @@ public class generatorPage {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        System.out.println("play kick");
+
                         kickPlay = false;
                     }else {
                         temp = musician.tempoTrigerBass();
                         note = musician.noteTrigerSpeedBass();
                         bass.play(file1, temp, note);
+                        //bass.play(file2, temp, note);
                         try {
                             Thread.sleep(temp);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        System.out.println("play bass");
-                        leadPlay = true;
                         kickPlay = true;
                     }
 
@@ -393,10 +399,11 @@ public class generatorPage {
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
-                pool.submit(pianoTh);
 
                 pool.submit(hatTh);
                 pool.submit(Hats);
+                pool.submit(Hats);
+                pool.submit(forteTh);
                 pool.submit(forteTh);
                 pool.submit(forteTh);
                 pool.submit(forteTh);
@@ -405,6 +412,7 @@ public class generatorPage {
                 //pool.submit(Lead);
                // pool.submit(pianoP);
                 pool.submit(tomTh);
+                //pool.submit(tomTh);
 
             } else {
                 pool.shutdown();
