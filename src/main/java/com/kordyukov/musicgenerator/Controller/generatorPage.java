@@ -25,6 +25,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Stream;
 
+
 @Data
 @Controller
 public class generatorPage {
@@ -50,9 +51,7 @@ public class generatorPage {
     private int attemptUser = 0;
     private boolean checkProject;
     public static boolean checkBaseDirTomcat;
-    private boolean leadPlay;
-    private boolean kickPlay;
-
+    boolean leadPlay = false;
 
     Thread tomTh = new Thread(){
         @SneakyThrows
@@ -71,11 +70,9 @@ public class generatorPage {
     };
 
     private Thread bassTh = new Thread() {
-        @SneakyThrows
         @Override
         public void run() {
-            File file,file1;
-
+            File file;
 
             file = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
             if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
@@ -83,14 +80,18 @@ public class generatorPage {
             int temp = 0;
             float note;
             while (true) {
-                if(!kickPlay) {
+
                     temp = musician.tempoTrigerBass();
                     note = musician.noteTrigerSpeedBass();
                     bass.play(file, temp, note);
-                    Thread.sleep(temp);
+                    try {
+                        Thread.sleep(temp);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("play bass");
                     leadPlay = true;
-                    kickPlay = true;
-                }
+
             }
         }
     };
@@ -99,20 +100,17 @@ public class generatorPage {
             @SneakyThrows
             @Override
             public void run() {
-                File file,file1;
+                File file, file1;
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"forte.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"forte.wav");
-                file1 = searchFile(MusicGeneratorConst.pathIdea,"forte1.wav");
-                if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"forte1.wav");
 
                 int temp = 0;
                 while (true) {
                     temp = musician.tempoTrigerForte();
                     forte.play(file, temp,  musician.noteTrigerSpeedForte());
                     forte.play(file, temp, musician.noteTrigerSpeedForte());
-                    //forte.play(file1, temp, musician.noteTrigerSpeedForte());
-                   // forte.play(file, temp, musician.noteTrigerSpeedForte());
+
                     Thread.sleep(temp);
                 }
 
@@ -140,21 +138,43 @@ public class generatorPage {
 
         };
         private Thread kickTh = new Thread() {
-            @SneakyThrows
             @Override
             public void run() {
-                File file;
+                File file,file1;
+                file1 = searchFile(MusicGeneratorConst.pathIdea,"Bass.wav");
+                if (!checkProject) file1 = searchFile(MusicGeneratorConst.pathTomcat,"Bass.wav");
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"Kick.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Kick.wav");
-
+                int temp;
+                float note;
+                boolean kickPlay = false;
 
                 while (true) {
+
                     if (kickPlay) {
                         kick.play(file, musician.tempoTrigerKick());
-                        Thread.sleep(musician.tempoTrigerKick());
+                        try {
+                            Thread.sleep(musician.tempoTrigerKick());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("play kick");
                         kickPlay = false;
+                    }else {
+                        temp = musician.tempoTrigerBass();
+                        note = musician.noteTrigerSpeedBass();
+                        bass.play(file1, temp, note);
+                        try {
+                            Thread.sleep(temp);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("play bass");
+                        leadPlay = true;
+                        kickPlay = true;
                     }
+
                 }
 
             }
@@ -368,12 +388,13 @@ public class generatorPage {
             if (attemptUser == 0) {
                 //pool.submit(socketRec);
                 //В разработке pool.submit(serverStart);
-                pool.submit(bassTh);
+                //bassTh.start();
+                kickTh.start();
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
-                pool.submit(kickTh);
+
                 pool.submit(hatTh);
                 pool.submit(Hats);
                 pool.submit(forteTh);

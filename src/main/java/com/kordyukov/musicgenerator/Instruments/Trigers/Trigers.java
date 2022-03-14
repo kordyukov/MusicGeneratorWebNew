@@ -57,7 +57,7 @@ public class Trigers implements Musician {
 
         check = p1==p2;
 
-            tempoKick = !check ? tempKick[(0 + (int) (Math.random() * 1))]: tempKick[(0 + (int) (Math.random() * 3))];
+            tempoKick =  tempKick[(0 + (int) (Math.random() * 1))];
 
         return tempoKick;
     }
