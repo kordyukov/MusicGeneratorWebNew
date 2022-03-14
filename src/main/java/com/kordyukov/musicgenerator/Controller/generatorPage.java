@@ -194,10 +194,11 @@ public class generatorPage {
 
                 file = searchFile(MusicGeneratorConst.pathIdea,"Snare.wav");
                 if (!checkProject) file = searchFile(MusicGeneratorConst.pathTomcat,"Snare.wav");
-
+                int temp = 0;
                 while (true) {
-                    snare.play(file, musician.tempoTrigerKick());
-                    Thread.sleep(musician.tempoTrigerKick());
+                    temp = musician.tempoTrigerSnare();
+                    snare.play(file, temp);
+                    Thread.sleep(temp);
                 }
 
             }
@@ -399,7 +400,7 @@ public class generatorPage {
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
                 pool.submit(pianoTh);
-
+                pool.submit(pianoTh);
                 pool.submit(hatTh);
                 pool.submit(Hats);
                 pool.submit(Hats);
