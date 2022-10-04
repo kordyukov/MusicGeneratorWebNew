@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.kordyukov.musicgenerator.Controller.generatorPage;
 import com.kordyukov.musicgenerator.MusicGeneratorConst;
 import com.sun.net.httpserver.HttpServer;
 
