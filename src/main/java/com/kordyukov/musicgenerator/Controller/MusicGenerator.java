@@ -209,12 +209,6 @@ public class MusicGenerator {
             @SneakyThrows
             @Override
             public void run() {
-
-//                while (true) {
-//                    temp = musician.tempoTrigerBass();
-//                    fortePiano.PlayPiano(temp);
-//                    Thread.sleep(temp);
-//                }
                 File file;
 
                 file = new File("lead.wav");
@@ -222,8 +216,7 @@ public class MusicGenerator {
                 while (true) {
                     temp[0] = musician.tempoTrigerBass();
                     piano.play(file, temp[0], musician.noteTrigerSpeedBass());
-                    piano.play(file, temp[0], musician.noteTrigerSpeedBass());
-                    Thread.sleep(temp[0] *2);
+                    //Thread.sleep(temp[0] *2);
                 }
             }
         };
@@ -305,40 +298,48 @@ public class MusicGenerator {
 
         };
 
-//    Thread pianoP = new Thread(){
-//        @SneakyThrows
-//        @Override
-//        public void run() {
-//            while (true){
-//                fortePiano.PlayPiano(1300);
-//                Thread.sleep(1300);
-//            }
-//        }
-//    };
+    Thread pianoP = new Thread(){
+        @SneakyThrows
+        @Override
+        public void run() {
+            while (true){
+                fortePiano.PlayPiano(1300);
+                Thread.sleep(1300);
+            }
+        }
+    };
 
         ExecutorService pool;
-        pool = Executors.newFixedThreadPool(20);
+        pool = Executors.newFixedThreadPool(50);
             //pool.submit(socketRec);
-            //В разработке pool.submit(serverStart);
+            //pool.submit(serverStart);
             //bassTh.start();
             kickTh.start();
-            //pool.submit(pianoTh);
-           // pool.submit(pianoTh);
-           // pool.submit(pianoTh);
-           // pool.submit(pianoTh);
+            pool.submit(pianoTh);
+//            pool.submit(pianoTh);
+//            pool.submit(pianoTh);
+//            pool.submit(pianoTh);
             pool.submit(hatTh);
             pool.submit(Hats);
             pool.submit(Hats);
+           pool.submit(forteTh);
 //            pool.submit(forteTh);
-//            pool.submit(forteTh);
-//            pool.submit(forteTh);
-            pool.submit(forteTh);
-            pool.submit(snareTh);
             pool.submit(clapTh);
-            //pool.submit(Lead);
-            // pool.submit(pianoP);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(Lead);
+            pool.submit(pianoP);
+            pool.submit(pianoP);
+            pool.submit(pianoP);
+            pool.submit(pianoP);
+            pool.submit(pianoP);
             pool.submit(tomTh);
-            //pool.submit(tomTh);
+            pool.submit(tomTh);
 
     }
 }

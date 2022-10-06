@@ -30,13 +30,9 @@ public class SimpleHttpServer {
 
             isBaseDirIdea = !Files.exists(path);
 
-            if(isBaseDirIdea){
-                server.createContext("/", new StaticFileHandler(MusicGeneratorConst.baseDirIdea ));
-                System.out.println("SimpleHttpServer baseDirIdea");
-            } else {
                 server.createContext("/", new StaticFileHandler(MusicGeneratorConst.baseDirTomcat ));
                 System.out.println("SimpleHttpServer baseDirTomcat");
-            }
+
             server.start();
             System.out.println("server.start()");
 

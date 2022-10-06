@@ -36,10 +36,6 @@ public class Piano {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             AudioFormat formatIn = audioInputStream.getFormat();
             AudioFormat format = new AudioFormat(formatIn.getSampleRate()*note, formatIn.getSampleSizeInBits(), formatIn.getChannels(), true, formatIn.isBigEndian());
-            //a = a + 0.01;
-
-//            System.out.println(formatIn.toString());
-//            System.out.println(format.toString());
             byte[] data = new byte[1024];
             DataLine.Info dinfo = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine line = (SourceDataLine)AudioSystem.getLine(dinfo);
