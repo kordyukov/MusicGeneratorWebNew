@@ -137,7 +137,6 @@ public class MusicGenerator {
                         temp = musician.tempoTrigerBass();
                         note = musician.noteTrigerSpeedBass();
                         bass.play(file1, temp, note);
-                        //bass.play(file2, temp, note);
                         try {
                             Thread.sleep(temp);
                         } catch (InterruptedException e) {
